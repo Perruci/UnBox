@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo "Iniciando o ambiente virtual Pipenv"
-pipenv shell
+bash init_environment.sh
 
 echo "Realizando a chamada do servidor"
-python3 client/src/client.py
+python3 client/src/main.py

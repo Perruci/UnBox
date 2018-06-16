@@ -2,6 +2,7 @@
 
 import socket
 import client_thread
+import sys
 
 def main():
     LOCALHOST = ''
@@ -18,4 +19,8 @@ def main():
         newthread.start()
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        sys.exit(0)

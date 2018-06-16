@@ -1,7 +1,6 @@
 """ Funcionalidades fundamentais de um cliente da rede estão contidas neste arquivo """
 
 import socket
-import messages
 
 class NetworkClient:
     """ Classe NetworkClient """
@@ -15,14 +14,27 @@ class NetworkClient:
         """ Connect to server """
         self.socket_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_client.connect((self.SERVER_ADDR, self.PORT))
-        self.socket_client.sendall(messages.send_text("This is from Client"))
+        self.send_text("This is from Client")
+
+    def send_text(self, msg):
+        """ Sends text message through socket connection """
+        self.socket_client.sendall(bytes(msg,'UTF-8'))
+
+    def recieve_text(self):
+        """ Returns string message recieved from socket interface """
+        data = self.socket_client.recv(1024)
+        return data.decode()
+
+    def end_connection(self):
+        """ Sends terminating message to server """
+        self.send_text('bye')
 
     def run(self):
         """ Realiza loop principal de aquisição de dados """
         in_data =  self.socket_client.recv(1024)
         print("From Server :" ,in_data.decode())
         out_data = input()
-        self.socket_client.sendall(messages.send_text(out_data))
+        self.send_text(out_data)
         if out_data=='bye':
             return False
         return True
@@ -30,5 +42,5 @@ class NetworkClient:
     def close(self):
         """ Close socket connection """
         print('End of client connection')
-        self.socket_client.sendall(messages.end_connection())
+        self.end_connection()
         self.socket_client.close()

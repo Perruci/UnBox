@@ -36,6 +36,7 @@ class MainWindow:
         """ Futuramente utilizada para realizar o login do usuário no servido """
         self.username = input('Insira o seu nome de usuário:\n ->')
         self.password = input('Insira sua senha:\n ->')
+        return self.username, self.password
 
     def menu(self):
         """ Menu de opções do cliente """
@@ -51,4 +52,4 @@ class MainWindow:
             """ While choice is False, repeat the request """
             print('Operação Inválida...')
             choice = get_choice('Qual operação deseja realizar? (1-6)\n->')
-        pass
+        return choice

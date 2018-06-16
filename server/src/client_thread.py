@@ -2,7 +2,6 @@
 
 import socket
 import threading
-import messages
 
 class ClientThread(threading.Thread):
     """ Classe ClientThread
@@ -23,11 +22,12 @@ class ClientThread(threading.Thread):
 
     def send_text(self, msg):
         """ Sends text message through socket connection """
-        self.csocket.send(messages.send_text(msg))
+        self.csocket.send(bytes(msg,'UTF-8'))
 
     def recieve_text(self):
         """ Returns text message recieved by the socket """
-        return messages.recieve_text(self.csocket.recv(2048))
+        data = self.csocket.recv(2048)
+        return data.decode()
 
     def run(self):
         """ Main thread function
@@ -36,7 +36,7 @@ class ClientThread(threading.Thread):
         """
 
         print ("Connection from : ", self.caddress)
-        self.send_text("Hi, This is from Server..")
+        self.send_text("Succsessful connection to server!")
         msg = ''
         while True:
             msg = self.recieve_text()

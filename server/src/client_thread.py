@@ -21,6 +21,14 @@ class ClientThread(threading.Thread):
         self.caddress = clientAddress
         print ("New connection added: ", self.caddress)
 
+    def send_text(self, msg):
+        """ Sends text message through socket connection """
+        self.csocket.send(messages.send_text(msg))
+
+    def recieve_text(self):
+        """ Returns text message recieved by the socket """
+        return messages.recieve_text(self.csocket.recv(2048))
+
     def run(self):
         """ Main thread function
 
@@ -28,12 +36,12 @@ class ClientThread(threading.Thread):
         """
 
         print ("Connection from : ", self.caddress)
-        self.csocket.send(messages.send_text("Hi, This is from Server.."))
+        self.send_text("Hi, This is from Server..")
         msg = ''
         while True:
-            msg = messages.recieve_text(self.csocket.recv(2048))
+            msg = self.recieve_text()
             if msg=='bye':
               break
             print ("from client", msg)
-            self.csocket.send(messages.send_text(msg))
+            self.send_text(msg)
         print ("Client at ", self.caddress , " disconnected...")

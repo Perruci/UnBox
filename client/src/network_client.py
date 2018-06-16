@@ -29,6 +29,15 @@ class NetworkClient:
         """ Sends terminating message to server """
         self.send_text('bye')
 
+    def log_in(self, username, password):
+        """ Performs user authentication between server and client """
+        self.send_text('Log-in request,'+ username + ',' + password)
+        response = self.recieve_text()
+        if response == 'Found':
+            return True
+        else:
+            return False
+
     def run(self):
         """ Realiza loop principal de aquisição de dados """
         in_data =  self.socket_client.recv(1024)

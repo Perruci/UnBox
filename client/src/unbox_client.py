@@ -19,7 +19,13 @@ class UnBoxClient:
     def log_in(self):
         """ UI login and network connection interface """
         self.ui.welcome()
-        self.ui.log_in()
+        username, password = self.ui.log_in()
+        if self.client.log_in(username, password):
+            print('User found!\n Opening your filesystem...')
+            return True
+        else:
+            print('User not found...\n Create a new user?')
+            return False
 
     def main_loop(self):
         """ Main Loop of the client

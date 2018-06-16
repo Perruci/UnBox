@@ -41,7 +41,13 @@ class ClientThread(threading.Thread):
         while True:
             msg = self.recieve_text()
             if msg=='bye':
-              break
-            print ("from client", msg)
-            self.send_text(msg)
-        print ("Client at ", self.caddress , " disconnected...")
+                print ("Client at ", self.caddress , " disconnected...")
+                break
+            split_msg = msg.split(',')
+            if split_msg[0] == 'Log-in request':
+                print('Log-in request')
+                user = split_msg[1]
+                password = split_msg[2]
+                print('Username: {}'.format(user))
+                print('Password: {}'.format(password))
+                self.send_text('Found')

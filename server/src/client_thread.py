@@ -2,6 +2,7 @@
 
 import socket
 import threading
+import messages
 
 class ClientThread(threading.Thread):
     """ Classe ClientThread
@@ -25,15 +26,14 @@ class ClientThread(threading.Thread):
 
         Called after thread is started: ie. thread.start().
         """
-        
+
         print ("Connection from : ", self.caddress)
-        self.csocket.send(bytes("Hi, This is from Server..",'utf-8'))
+        self.csocket.send(messages.send_text("Hi, This is from Server.."))
         msg = ''
         while True:
-            data = self.csocket.recv(2048)
-            msg = data.decode()
+            msg = messages.recieve_text(self.csocket.recv(2048))
             if msg=='bye':
               break
             print ("from client", msg)
-            self.csocket.send(bytes(msg,'UTF-8'))
+            self.csocket.send(messages.send_text(msg))
         print ("Client at ", self.caddress , " disconnected...")

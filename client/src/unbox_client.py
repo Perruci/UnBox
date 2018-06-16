@@ -22,9 +22,34 @@ class UnBoxClient:
         self.ui.log_in()
 
     def main_loop(self):
-        """ Main Loop of the client """
-        self.ui.menu()
-        run = True
-        while run:
-          run = self.client.run()
-        self.client.close()
+        """ Main Loop of the client
+
+        Return:
+            True for whichever operations beside exit
+            False when user choses to end program
+        """
+        choice = self.ui.menu()
+
+        if choice == '1':
+            print('Option 1 was your choice')
+
+        elif choice == '2':
+            print('Option 2 was your choice')
+
+        elif choice == '3':
+            print('Option 3 was your choice')
+
+        elif choice == '4':
+            print('Option 4 was your choice')
+
+        elif choice == '5':
+            print('Option 5 was your choice')
+
+        elif choice == '6':
+            print('Option 6 was your choice')
+            print('Quitting program')
+            self.client.close()
+            return False
+
+        run = self.client.run()
+        return True

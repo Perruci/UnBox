@@ -30,4 +30,5 @@ class NetworkClient:
     def close(self):
         """ Close socket connection """
         print('End of client connection')
+        self.socket_client.sendall(messages.send_text('bye'))
         self.socket_client.close()

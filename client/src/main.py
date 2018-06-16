@@ -5,7 +5,8 @@ import unbox_client
 
 def main():
     client = unbox_client.UnBoxClient()
-    client.main_loop()
+    while client.main_loop():
+        pass
 
 if __name__ == '__main__':
     try:

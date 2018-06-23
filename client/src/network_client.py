@@ -33,8 +33,9 @@ class NetworkClient:
     def log_in(self, username, password):
         """ Performs user authentication between server and client """
         self.send_text('Log-in request,'+ username + ',' + password)
-        time.sleep(0.5)
         response = self.recieve_text()
+        time.sleep(1)
+        print(response)
         if response == 'Found':
             return True
         else:

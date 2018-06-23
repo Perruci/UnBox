@@ -29,6 +29,11 @@ class ClientThread(threading.Thread):
         data = self.csocket.recv(2048)
         return data.decode()
 
+    def authenticate_user(self, username, password):
+        """ Username and password authentication """
+        # TODO: Access to database
+        return True
+
     def run(self):
         """ Main thread function
 
@@ -36,7 +41,6 @@ class ClientThread(threading.Thread):
         """
 
         print ("Connection from : ", self.caddress)
-        self.send_text("Succsessful connection to server!")
         msg = ''
         while True:
             msg = self.recieve_text()
@@ -46,8 +50,13 @@ class ClientThread(threading.Thread):
             split_msg = msg.split(',')
             if split_msg[0] == 'Log-in request':
                 print('Log-in request')
-                user = split_msg[1]
+                username = split_msg[1]
                 password = split_msg[2]
-                print('Username: {}'.format(user))
+                print('Username: {}'.format(username))
                 print('Password: {}'.format(password))
-                self.send_text('Found')
+                if self.authenticate_user(username, password):
+                    print('User authenticated')
+                    self.send_text('Found')
+                else:
+                    print('Authentication failure')
+                    self.send_text('Not Found')

@@ -1,5 +1,7 @@
 """ User Interface for UnBox Clients """
 
+import unbox_client
+
 def get_choice(message):
     """ get_choice
 
@@ -25,6 +27,12 @@ class MainWindow:
         """ Construtor """
         pass
 
+    def setup(self):
+        """ Basic UnBox app configuration """
+        self.unbox_app = unbox_client.UnBoxClient()
+        self.welcome()
+        self.log_in()
+
     def welcome(self):
         """ Mensagem de boas vindas """
         print('Bem vindo ao sistema UnBox\n')
@@ -34,9 +42,23 @@ class MainWindow:
 
     def log_in(self):
         """ Futuramente utilizada para realizar o login do usuário no servido """
-        self.username = input('Insira o seu nome de usuário:\n ->')
-        self.password = input('Insira sua senha:\n ->')
-        return self.username, self.password
+        user_auth = False
+        while not user_auth:
+            username = input('Insira o seu nome de usuário:\n ->')
+            password = input('Insira sua senha:\n ->')
+            user_auth = self.unbox_app.log_in(username, password)
+            if user_auth:
+                print('User found!\n Opening your filesystem...')
+            else:
+                print('User not found...')
+                new_user = input('Create a new user? (y/n)\n->')
+                if new_user == 'y':
+                    self.unbox_app.register(username, password)
+                    print('User {} registered with success'.format(username))
+                    user_auth = True
+                else:
+                    print('Try to login again...')
+        self.username, self.password = username, password
 
     def menu(self):
         """ Menu de opções do cliente """
@@ -53,3 +75,35 @@ class MainWindow:
             print('Operação Inválida...')
             choice = get_choice('Qual operação deseja realizar? (1-6)\n->')
         return choice
+
+    def main_loop(self):
+        """ Main Loop of the UnBox Application
+
+        Return:
+            True for whichever operations beside exit
+            False when user choses to end program
+        """
+        choice = self.menu()
+
+        if choice == '1':
+            print('Option 1 was your choice')
+
+        elif choice == '2':
+            print('Option 2 was your choice')
+
+        elif choice == '3':
+            print('Option 3 was your choice')
+
+        elif choice == '4':
+            print('Option 4 was your choice')
+
+        elif choice == '5':
+            print('Option 5 was your choice')
+
+        elif choice == '6':
+            print('Option 6 was your choice')
+            print('Quitting program')
+            self.unbox_app.close()
+            return False
+
+        return True

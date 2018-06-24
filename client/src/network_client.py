@@ -78,16 +78,6 @@ class NetworkClient:
         else:
             return False
 
-    def run(self):
-        """ Realiza loop principal de aquisição de dados """
-        in_data =  self.socket_client.recv(1024)
-        print("From Server :" ,in_data.decode())
-        out_data = input()
-        self.send_text(out_data)
-        if out_data=='bye':
-            return False
-        return True
-
     def close(self):
         """ Close socket connection """
         print('End of client connection')

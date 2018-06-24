@@ -2,6 +2,7 @@
 
 import time
 import socket
+import logging
 
 class NetworkClient:
     """ Classe NetworkClient """
@@ -10,21 +11,38 @@ class NetworkClient:
         """ Construtor """
         self.SERVER_ADDR = ''
         self.PORT = 8888
+        self.connect()
+        self.logger_setup()
 
     def connect(self):
         """ Connect to server """
         self.socket_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket_client.connect((self.SERVER_ADDR, self.PORT))
-        self.send_text("This is from Client")
+
+    def logger_setup(self):
+        """ Setup logging functionality """
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+        # create a file handler
+        handler = logging.FileHandler('client/client_history.log')
+        handler.setLevel(logging.DEBUG)
+        # create a logging format
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        # add the handlers to the self.logger
+        self.logger.addHandler(handler)
 
     def send_text(self, msg):
         """ Sends text message through socket connection """
         self.socket_client.sendall(bytes(msg,'UTF-8'))
+        self.logger.debug('Message sent from client: {}'.format(msg))
 
     def recieve_text(self):
         """ Returns string message recieved from socket interface """
         data = self.socket_client.recv(1024)
-        return data.decode()
+        data = data.decode()
+        self.logger.debug('Message recieved on client: {}'.format(data))
+        return data
 
     def end_connection(self):
         """ Sends terminating message to server """

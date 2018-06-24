@@ -11,7 +11,6 @@ class UnBoxClient:
     def __init__(self):
         """ Construtor """
         self.client = network_client.NetworkClient()
-        self.client.connect()
 
     def log_in(self, username, password):
         """ Login interface """

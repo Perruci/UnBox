@@ -2,6 +2,7 @@
 
 import socket
 import threading
+import logging
 
 import database
 
@@ -20,7 +21,10 @@ class ClientThread(threading.Thread):
         threading.Thread.__init__(self)
         self.client_socket = clientsocket
         self.client_address = clientAddress
-        print ("New connection added: ", self.client_address)
+        self.logger_setup()
+        self.logger.info('Connection to client at {}'.format(self.client_address))
+        print('New connection added: ', self.client_address)
+
 
     def run(self):
         """ Main thread function
@@ -29,12 +33,12 @@ class ClientThread(threading.Thread):
         Recieves operation commands through socket and performs them.
         """
 
-        print ("Connection from : ", self.client_address)
+        print ('Connection from : {}'.format(self.client_address))
         msg = ''
         while True:
             msg = self.recieve_text()
             if msg=='bye':
-                print ('User ', self.username, ' at ', self.client_address , ' disconnected...')
+                print ('User {} at {} disconnected...'.format(self.username, self.client_address))
                 break
             # Processes an operation commands (comma separated) -----------------------------
             split_msg = msg.split(',')
@@ -43,14 +47,30 @@ class ClientThread(threading.Thread):
             if split_msg[0] == 'Register request':
                 self.register_request(split_msg)
 
+    def logger_setup(self):
+        """ Setup logging functionality """
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+        # create a file handler
+        handler = logging.FileHandler('server/server_history.log')
+        handler.setLevel(logging.DEBUG)
+        # create a logging format
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        # add the handlers to the self.logger
+        self.logger.addHandler(handler)
+
     def send_text(self, msg):
         """ Sends text message through socket connection """
+        self.logger.debug('Message sent to client at {}: {}'.format(self.client_address, msg))
         self.client_socket.send(bytes(msg,'UTF-8'))
 
     def recieve_text(self):
         """ Returns text message recieved by the socket """
         data = self.client_socket.recv(2048)
-        return data.decode()
+        data = data.decode()
+        self.logger.debug('Message recieved from client at {}: {}'.format(self.client_address, data))
+        return data
 
     def log_in_request(self, message):
         """ Processes a login request recieved for the client.
@@ -79,6 +99,7 @@ class ClientThread(threading.Thread):
             self.send_text('Not found')
 
         self.username, self.password = username, password
+        self.logger.info('User access authenticated {}'.format(self.username))
 
     def register_request(self, message):
         """ Process an registration request for the client
@@ -87,10 +108,8 @@ class ClientThread(threading.Thread):
             message: expected message is an array on the following format:
                 ['Register request', Username, Password]
         """
-        print(message[0])
         username = message[1]
         password = message[2]
-        print('Username: {}'.format(username))
-        print('Password: {}'.format(password))
         database.register_user(username, password)
+        self.logger.info('New Username Registered: ' + username)
         self.send_text('Created')

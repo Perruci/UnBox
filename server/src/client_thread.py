@@ -35,24 +35,34 @@ class ClientThread(threading.Thread):
         """
 
         print ('Connection from : {}'.format(self.client_address))
-        msg = ''
+        message = ''
         while True:
-            msg = self.recieve_text()
-            if msg=='bye':
+            message = self.recieve_text()
+            if message=='bye':
                 print ('User {} at {} disconnected...'.format(self.username, self.client_address))
                 break
             # Processes an operation commands (comma separated) -----------------------------
-            split_msg = msg.split(',')
-            if split_msg[0] == 'Log-in request':
-                self.log_in_request(split_msg)
-            elif split_msg[0] == 'Register request':
-                self.register_request(split_msg)
-            elif split_msg[0] == 'View files':
+            message = message.split(',')
+            if message[0] == 'Log-in request':
+                self.log_in_request(message)
+
+            elif message[0] == 'Register request':
+                self.register_request(message)
+
+            elif message[0] == 'View files':
                 self.view_files_request()
-            elif split_msg[0] == 'Upload request':
-                self.upload_request(split_msg)
-            elif split_msg[0] == 'Download request':
-                self.download_request(split_msg)
+
+            elif message[0] == 'Upload request':
+                self.upload_request(message)
+
+            elif message[0] == 'Download request':
+                self.download_request(message)
+
+            elif message[0] == 'Move request':
+                self.move_file_request(message)
+
+            elif message[0] == 'Delete request':
+                self.delete_file_request(message)
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -206,3 +216,9 @@ class ClientThread(threading.Thread):
         server_filename = user_files[file_requested]['location']
         self.send_file(server_filename, file_size)
         time.sleep(0.1)
+
+    def move_file_request(self, message):
+        pass
+
+    def delete_file_request(self, message):
+        pass

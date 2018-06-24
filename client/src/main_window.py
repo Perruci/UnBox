@@ -75,6 +75,7 @@ class MainWindow:
         """
         if files_csv == 'System is Empty':
             print('\t{}, seu sistema de arquivos ainda está vazio...'.format(self.username))
+            self.files = ''
             return
         print('{}, seu sistema de arquivos atualmente consiste em:'.format(self.username))
         self.files = files_csv.split(',')
@@ -86,9 +87,9 @@ class MainWindow:
         print('Nesta versão do sistema, você é capaz de:')
         print('\t1 - Visualizar seus arquivos')
         print('\t2 - Download de um arquivo')
-        print('\t3 - Download de uma pasta')
-        print('\t4 - Upload de um arquivo')
-        print('\t5 - Upload de uma pasta')
+        print('\t3 - Upload de um arquivo')
+        print('\t4 - Mover um arquivo')
+        print('\t5 - Deletar um arquivo')
         print('\t6 - Encerrar sessão')
         choice = get_choice('Qual operação deseja realizar? (1-6)\n-> ')
         while(not choice):
@@ -126,23 +127,25 @@ class MainWindow:
                 self.unbox_app.Download_file(server_path, client_path)
 
         elif choice == '3':
-            print('Download de uma pasta foi a sua escolha')
-
-        elif choice == '4':
             print('Upload de um arquivo foi a sua escolha')
             file_path = input('Qual o caminho para o arquivo que deseja enviar? (only .txt supported)\n-> ')
             target_path = input('Em qual caminho deseja armazená-lo? (nome do arquivo incluso)\n-> ')
             if target_path is '':
                 print('Caminho de destino inválido, tente novamente')
             else:
+                file_path = file_path.replace(' ','') # removes empty spaces
+                target_path = target_path.replace(' ','') # removes empty spaces
                 file_exist = self.unbox_app.upload_file(file_path, target_path)
                 if file_exist:
                     print('O upload foi realizado com sucesso')
                 else:
                     print('O arquivo indicado no caminho ({}) não foi encontrado'.format(file_path))
 
+        elif choice == '4':
+            print('Mover um arquivo foi a sua escolha')
+
         elif choice == '5':
-            print('Option 5 was your choice')
+            print('Deletar um arquivo foi a sua escolha')
 
         elif choice == '6':
             print('Option 6 was your choice')

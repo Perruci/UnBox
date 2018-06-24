@@ -112,10 +112,10 @@ class MainWindow:
             self.print_files(files_csv)
 
         elif choice == '2':
-            print('Option 2 was your choice')
+            print('Download de um arquivo foi a sua escolha')
 
         elif choice == '3':
-            print('Option 3 was your choice')
+            print('Download de uma pasta foi a sua escolha')
 
         elif choice == '4':
             print('Upload de um arquivo foi a sua escolha')

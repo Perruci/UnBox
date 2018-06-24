@@ -41,9 +41,24 @@ def update_user_data(username, new_dict):
     data[username] = new_dict
     dump_yaml(USER_DATA_FILE, data)
 
+def path_to_filename(username, path_to_file):
+    """ Converts a path formated as path/to/file.txt to a filename, ie. path_to_file.txt """
+    filename = '{}_{}'.format(username, path_to_file)
+    filename = filename.replace('/','_')
+    print(filename)
+    return filename
+
 def add_user_filesystem(username, path_to_file, file_size):
-    """ Adds a new file on user data """
-    new_file = {path_to_file : file_size}
+    """ Adds a new file on user data dictionary
+
+    Each entry is formated as:
+        path_to_file:
+            size: file_size
+            location: filename
+    """
+    # TODO: talvez transformar files em um outro dict, contendo {tamanho, nome_do_arquivo} (ou só nome do arquivo, sei lá)
+    filename = path_to_filename(username, path_to_file)
+    new_file = {path_to_file : {'size' : file_size, 'location' : filename}}
     user_dict = load_user_data(username)
 
     if 'files' not in user_dict:
@@ -80,7 +95,7 @@ def register_user(username, password):
 def authenticate_user(username, password):
     """ Verify if user is listed on USER_DATA_FILE
     return:
-    Boolean tuple (user_exists, password_correct)
+        Boolean tuple (user_exists, password_correct)
     """
     user_exists, password_correct = False, False
 

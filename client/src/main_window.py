@@ -111,8 +111,7 @@ class MainWindow:
         elif choice == '2':
             print('Download de um arquivo foi a sua escolha')
             # view files is called
-            files_csv = self.unbox_app.view_files()
-            self.show_files(files_csv)
+            self.show_files()
             server_path = input('Qual o caminho para o arquivo que deseja baixar?\n-> ')
             client_path = input('Em qual caminho do seu sistema deseja armazená-lo? (a partir de: client/data/)\n-> ')
             if server_path is '':
@@ -129,8 +128,8 @@ class MainWindow:
             if target_path is '':
                 print('Caminho de destino inválido, tente novamente')
             else:
-                file_path = file_path.replace(' ','') # removes empty spaces
-                target_path = target_path.replace(' ','') # removes empty spaces
+                file_path = file_path.strip() # removes empty spaces on begining and end
+                target_path = target_path.strip() # removes empty spaces on begining and end
                 file_exist = self.unbox_app.upload_file(file_path, target_path)
                 if file_exist:
                     print('O upload foi realizado com sucesso')
@@ -139,6 +138,22 @@ class MainWindow:
 
         elif choice == '4':
             print('Mover um arquivo foi a sua escolha')
+            # view files is called
+            self.show_files()
+            original_path = input('Qual o caminho do arquivo que deseja mover?\n-> ')
+            target_path = input('Qual o caminho de destino do arquivo?\n-> ')
+            if target_path is '':
+                print('Caminho de destino inválido')
+            elif original_path is '':
+                print('Caminho inválido, tente novamente')
+            elif original_path not in self.files:
+                print('Caminho {} não corresponde a arquivos do servidor.\nTente novamente'.format(original_path))
+            else:
+                file_exist = self.unbox_app.move_file(original_path, target_path)
+                if file_exist:
+                    print('O arquivo foi movido com sucesso')
+                else:
+                    print('Houve um erro ao mover o arquivo')
 
         elif choice == '5':
             print('Deletar um arquivo foi a sua escolha')

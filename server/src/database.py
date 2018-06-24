@@ -99,6 +99,13 @@ def add_user_filesystem(username, path_to_file, file_size):
     update_user_data(username, user_dict)
     return filename
 
+def update_user_filesystem(username, file_dict):
+    """ Updates user files dict """
+    user_dict = load_user_data(username)
+    user_dict['files'] = file_dict
+    print('Updating {} filesystem'.format(username))
+    update_user_data(username, user_dict)
+
 def get_user_filesystem(username):
     """ Returns given user 'files' dictionary """
     user_dict = load_user_data(username)

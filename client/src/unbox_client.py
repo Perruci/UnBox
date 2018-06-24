@@ -72,5 +72,9 @@ class UnBoxClient:
         client_file = CLIENT_ROOT + client_file
         self.client.download_file(server_file, client_file)
 
+    def move_file(self, original_file, target_file):
+        """ Solicita a mudança no caminho para o arquivo no servidor """
+        return self.client.request_move_file(original_file, target_file)
+
     def close(self):
         self.client.close()

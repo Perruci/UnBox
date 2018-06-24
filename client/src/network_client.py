@@ -127,6 +127,17 @@ class NetworkClient:
         time.sleep(1)
         return response
 
+    def request_move_file(self, original_file, target_file):
+        """ Request an update on server file path """
+        message = 'Move request,{},{}'.format(original_file, target_file)
+        self.send_text(message)
+        response = self.recieve_text()
+        time.sleep(0.5)
+        if response == 'Move succeeded':
+            return True
+        else:
+            return False
+
     def upload_file(self, file_path, target_path, file_size):
         """ Uploads a file to the server
 

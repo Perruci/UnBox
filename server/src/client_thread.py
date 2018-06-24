@@ -206,7 +206,6 @@ class ClientThread(threading.Thread):
         file_size = message[2]
         # Updates user filesystem
         filename = database.add_user_filesystem(self.username, path_to_file, file_size)
-        # TODO: actual file transfer... may need to translate the filenames
         self.recieve_file(filename, int(file_size))
 
     def download_request(self, message):
@@ -222,8 +221,8 @@ class ClientThread(threading.Thread):
         file_requested = message[1]
         user_files = database.get_user_filesystem(self.username)
         if file_requested not in user_files:
-                self.send_text('File not found')
-                return
+            self.send_text('File not found')
+            return
         file_size = user_files[file_requested]['size']
         self.send_text('File exists,{}'.format(file_size))
         time.sleep(0.1)
@@ -232,7 +231,25 @@ class ClientThread(threading.Thread):
         time.sleep(0.1)
 
     def move_file_request(self, message):
-        pass
+        """ Process a move of file request
+
+        Recieves a new key for a given file of user dictionary
+
+        arguments:
+            message contains three informations:
+                ['Move request',original_filename,target_filename]
+
+        """
+        original_filename = message[1]
+        target_filename = message[2]
+        user_files = database.get_user_filesystem(self.username)
+        # Updates dictionary key
+        if original_filename in user_files:
+            user_files[target_filename] = user_files.pop(original_filename)
+            database.update_user_filesystem(self.username, user_files)
+            self.send_text('Move succeeded')
+        else:
+            self.send_text('File not found')
 
     def delete_file_request(self, message):
         pass

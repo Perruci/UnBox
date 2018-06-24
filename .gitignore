@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Application specific
+user_data.yaml
+
 # Distribution / packaging
 .Python
 build/

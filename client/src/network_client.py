@@ -35,8 +35,17 @@ class NetworkClient:
         self.send_text('Log-in request,'+ username + ',' + password)
         response = self.recieve_text()
         time.sleep(1)
-        print(response)
         if response == 'Found':
+            return True
+        else:
+            return False
+
+    def register(self, username, password):
+        """ Requests registration of a new user to server """
+        self.send_text('Register request,'+ username + ',' + password)
+        response = self.recieve_text()
+        time.sleep(1)
+        if response == 'Created':
             return True
         else:
             return False

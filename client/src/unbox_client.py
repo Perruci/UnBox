@@ -19,7 +19,7 @@ class UnBoxClient:
 
     def register(self, username, password):
         """ Register a new user """
-        pass
+        self.client.register(username, password)
 
     def close(self):
         self.client.close()

@@ -71,12 +71,16 @@ class MainWindow:
             - [path/to/file2]
 
         """
+        if files_csv == 'System is Empty':
+            print('\t{}, seu sistema de arquivos ainda está vazio...'.format(self.username))
+            return
         print('{}, seu sistema de arquivos atualmente consiste em:'.format(self.username))
         files = files_csv.split(',')
-        print('\n'.join('\t - {}'.format(file) for file in files))
+        print(''.join('\t - {}\n'.format(file) for file in files))
 
     def menu(self):
         """ Menu de opções do cliente """
+        print('\nOlá {} o/'.format(self.username))
         print('Nesta versão do sistema, você é capaz de:')
         print('\t1 - Visualizar seus arquivos')
         print('\t2 - Download de um arquivo')

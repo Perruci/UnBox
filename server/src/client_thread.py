@@ -127,6 +127,9 @@ class ClientThread(threading.Thread):
             dictionary of files of the given user
         """
         user_files = database.get_user_filesystem(self.username)
+        if user_files is None:
+            self.send_text('System is Empty')
+            return
         # converts to list
         user_files = list(user_files.keys())
         # converts to comma separated string

@@ -119,7 +119,7 @@ class MainWindow:
             elif server_path not in self.files:
                 print('Caminho {} não corresponde a arquivos do servidor.\nTente novamente'.format(server_path))
             else:
-                self.unbox_app.Download_file(server_path, client_path)
+                self.unbox_app.download_file(server_path, client_path)
 
         elif choice == '3':
             print('Upload de um arquivo foi a sua escolha')
@@ -149,18 +149,30 @@ class MainWindow:
             elif original_path not in self.files:
                 print('Caminho {} não corresponde a arquivos do servidor.\nTente novamente'.format(original_path))
             else:
-                file_exist = self.unbox_app.move_file(original_path, target_path)
-                if file_exist:
+                success = self.unbox_app.move_file(original_path, target_path)
+                if success:
                     print('O arquivo foi movido com sucesso')
                 else:
                     print('Houve um erro ao mover o arquivo')
 
         elif choice == '5':
             print('Deletar um arquivo foi a sua escolha')
+            # view files is called
+            self.show_files()
+            server_path = input('Qual o caminho para o arquivo que deseja remover?\n-> ')
+            if server_path is '':
+                print('Caminho inválido, tente novamente')
+            elif server_path not in self.files:
+                print('Caminho {} não corresponde a arquivos do servidor.\nTente novamente'.format(server_path))
+            else:
+                success = self.unbox_app.remove_file(server_path)
+                if success:
+                    print('O arquivo foi removido com sucesso')
+                else:
+                    print('Houve um erro ao remover o arquivo')
 
         elif choice == '6':
-            print('Option 6 was your choice')
-            print('Quitting program')
+            print('Saindo do programa...')
             self.unbox_app.close()
             return False
 

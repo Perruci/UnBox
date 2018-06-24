@@ -138,6 +138,17 @@ class NetworkClient:
         else:
             return False
 
+    def request_remove_file(self, filename):
+        """ Request the removal of a file from the server database """
+        message = 'Remove request,{}'.format(filename)
+        self.send_text(message)
+        response = self.recieve_text()
+        time.sleep(0.5)
+        if response == 'Remove succeeded':
+            return True
+        else:
+            return False
+
     def upload_file(self, file_path, target_path, file_size):
         """ Uploads a file to the server
 

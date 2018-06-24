@@ -63,8 +63,8 @@ class ClientThread(threading.Thread):
             elif message[0] == 'Move request':
                 self.move_file_request(message)
 
-            elif message[0] == 'Delete request':
-                self.delete_file_request(message)
+            elif message[0] == 'Remove request':
+                self.remove_file_request(message)
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -184,7 +184,7 @@ class ClientThread(threading.Thread):
             dictionary of files of the given user
         """
         user_files = database.get_user_filesystem(self.username)
-        if user_files is None:
+        if user_files is None or not user_files:
             self.send_text('System is Empty')
             return
         # converts to list
@@ -251,5 +251,21 @@ class ClientThread(threading.Thread):
         else:
             self.send_text('File not found')
 
-    def delete_file_request(self, message):
-        pass
+    def remove_file_request(self, message):
+        """ Process a remove file request
+
+        Both erases the file from user filesystem dictionary and removes the file.
+
+        arguments:
+            message: vetor de strings no formato:
+                ['Remove request',filename]
+
+        """
+        filename = message[1]
+        user_files = database.get_user_filesystem(self.username)
+        if filename in user_files:
+            user_files.pop(filename)
+            database.update_user_filesystem(self.username, user_files)
+            self.send_text('Remove succeeded')
+        else:
+            self.send_text('File not found')

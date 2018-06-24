@@ -64,7 +64,7 @@ class UnBoxClient:
         self.client.upload_file(file_path, target_path, file_size)
         return True
 
-    def Download_file(self, server_file, client_file):
+    def download_file(self, server_file, client_file):
         """ Cria diretório solicitado pelo usuário e solicita o Download de arquivo do servidor """
         # Cria diretório solicitado pelo usuário
         client_path = get_path_from_file(client_file)
@@ -75,6 +75,10 @@ class UnBoxClient:
     def move_file(self, original_file, target_file):
         """ Solicita a mudança no caminho para o arquivo no servidor """
         return self.client.request_move_file(original_file, target_file)
+
+    def remove_file(self, server_file):
+        """ Request removing a file from the server """
+        return self.client.request_remove_file(server_file)
 
     def close(self):
         self.client.close()

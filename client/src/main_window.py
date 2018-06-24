@@ -77,8 +77,8 @@ class MainWindow:
             print('\t{}, seu sistema de arquivos ainda está vazio...'.format(self.username))
             return
         print('{}, seu sistema de arquivos atualmente consiste em:'.format(self.username))
-        files = files_csv.split(',')
-        print(''.join('\t - {}\n'.format(file) for file in files))
+        self.files = files_csv.split(',')
+        print(''.join('\t - {}\n'.format(file) for file in self.files))
 
     def menu(self):
         """ Menu de opções do cliente """
@@ -113,13 +113,24 @@ class MainWindow:
 
         elif choice == '2':
             print('Download de um arquivo foi a sua escolha')
+            # view files is called
+            files_csv = self.unbox_app.view_files()
+            self.print_files(files_csv)
+            server_path = input('Qual o caminho para o arquivo que deseja baixar?\n-> ')
+            client_path = input('Em qual caminho do seu sistema deseja armazená-lo? (a partir de: client/data/)\n-> ')
+            if server_path is '':
+                print('Caminho inválido, tente novamente')
+            elif server_path not in self.files:
+                print('Caminho {} não corresponde a arquivos do servidor.\nTente novamente'.format(server_path))
+            else:
+                self.unbox_app.Download_file(server_path, client_path)
 
         elif choice == '3':
             print('Download de uma pasta foi a sua escolha')
 
         elif choice == '4':
             print('Upload de um arquivo foi a sua escolha')
-            file_path = input('Qual o caminho para o arquivo que deseja enviar? (anly .txt supported)\n-> ')
+            file_path = input('Qual o caminho para o arquivo que deseja enviar? (only .txt supported)\n-> ')
             target_path = input('Em qual caminho deseja armazená-lo? (nome do arquivo incluso)\n-> ')
             if target_path is '':
                 print('Caminho de destino inválido, tente novamente')

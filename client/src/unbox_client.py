@@ -3,6 +3,21 @@
 import pathlib
 import network_client
 
+CLIENT_ROOT = 'client/home/'
+
+def get_path_from_file(file_path):
+    """ From a givem file_path, returns the folder path
+
+    eg. file_path = 'path/to/file.txt', returns 'path/to/'
+    """
+    path = pathlib.Path(file_path)
+    return str(path.parents[0])
+
+def create_folder_parents(folder_path):
+    """ Creates a folder to host the user files. The default root is CLIENT_ROOT """
+    folder_path = CLIENT_ROOT + folder_path
+    pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
+
 def file_exists(file_path):
     """ Returns true if file exists, false if it doesnt """
     file = pathlib.Path(file_path)
@@ -48,6 +63,12 @@ class UnBoxClient:
         file_size = get_file_size(file_path)
         self.client.upload_file(file_path, target_path, file_size)
         return True
+
+    def Download_file(self, server_file, client_file):
+        """ Cria diretório solicitado pelo usuário e solicita o Download de arquivo do servidor """
+        # Cria diretório solicitado pelo usuário
+        client_path = get_path_from_file(client_file)
+        create_folder_parents(client_path)
 
     def close(self):
         self.client.close()

@@ -23,11 +23,7 @@ class MainWindow:
 
     """
 
-    def __init___(self):
-        """ Construtor """
-        pass
-
-    def setup(self):
+    def __init__(self):
         """ Basic UnBox app configuration """
         self.unbox_app = unbox_client.UnBoxClient()
         self.welcome()

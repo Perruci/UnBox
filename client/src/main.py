@@ -5,7 +5,6 @@ import main_window
 
 def main():
     ui = main_window.MainWindow()
-    ui.setup()
     while ui.main_loop():
         pass
 

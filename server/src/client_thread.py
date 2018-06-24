@@ -7,6 +7,8 @@ import time
 
 import database
 
+SERVER_BUFF = 1024
+
 class ClientThread(threading.Thread):
     """ Classe ClientThread
 
@@ -85,7 +87,7 @@ class ClientThread(threading.Thread):
     def recieve_text(self):
         """ Returns text message recieved by the socket """
         try:
-            data = self.client_socket.recv(2048)
+            data = self.client_socket.recv(SERVER_BUFF)
             data = data.decode()
         except:
             self.logger.info('Error on recieve_text at {} with data: {}'.format(self.client_address, data))
@@ -99,7 +101,7 @@ class ClientThread(threading.Thread):
         file_data = b'' # empty bytes string
         recieved_size = 0
         while True:
-            new_data = self.client_socket.recv(1024)
+            new_data = self.client_socket.recv(SERVER_BUFF)
             recieved_size += len(new_data)
             file_data = file_data + new_data
             if recieved_size >= file_size:
@@ -120,10 +122,10 @@ class ClientThread(threading.Thread):
             return False
         try:
             with open(filename, 'rb') as file:
-                file_data = file.read(1024)
+                file_data = file.read(SERVER_BUFF)
                 while file_data:
                     self.client_socket.send(file_data)
-                    file_data = file.read(1024)
+                    file_data = file.read(SERVER_BUFF)
         except:
             self.logger.info('Error sending file through socket. Filename {}, file size: {}'.format(filename, file_size))
             return False

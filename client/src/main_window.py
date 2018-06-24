@@ -124,7 +124,7 @@ class MainWindow:
 
         elif choice == '3':
             print('Upload de um arquivo foi a sua escolha')
-            file_path = input('Qual o caminho para o arquivo que deseja enviar? (only .txt supported)\n-> ')
+            file_path = input('Qual o caminho para o arquivo que deseja enviar?\n-> ')
             target_path = input('Em qual caminho deseja armazená-lo? (nome do arquivo incluso)\n-> ')
             if target_path is '':
                 print('Caminho de destino inválido, tente novamente')

@@ -18,9 +18,9 @@ class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
         """ Contrutor da classe. """
         threading.Thread.__init__(self)
-        self.csocket = clientsocket
-        self.caddress = clientAddress
-        print ("New connection added: ", self.caddress)
+        self.client_socket = clientsocket
+        self.client_address = clientAddress
+        print ("New connection added: ", self.client_address)
 
     def run(self):
         """ Main thread function
@@ -29,12 +29,12 @@ class ClientThread(threading.Thread):
         Recieves operation commands through socket and performs them.
         """
 
-        print ("Connection from : ", self.caddress)
+        print ("Connection from : ", self.client_address)
         msg = ''
         while True:
             msg = self.recieve_text()
             if msg=='bye':
-                print ('User ', self.username, ' at ', self.caddress , ' disconnected...')
+                print ('User ', self.username, ' at ', self.client_address , ' disconnected...')
                 break
             # Processes an operation commands (comma separated) -----------------------------
             split_msg = msg.split(',')
@@ -45,11 +45,11 @@ class ClientThread(threading.Thread):
 
     def send_text(self, msg):
         """ Sends text message through socket connection """
-        self.csocket.send(bytes(msg,'UTF-8'))
+        self.client_socket.send(bytes(msg,'UTF-8'))
 
     def recieve_text(self):
         """ Returns text message recieved by the socket """
-        data = self.csocket.recv(2048)
+        data = self.client_socket.recv(2048)
         return data.decode()
 
     def log_in_request(self, message):

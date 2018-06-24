@@ -66,6 +66,8 @@ class MainWindow:
     def print_files(self, files_csv):
         """ Imprime o sistema de arquivos recebidos do servidor.
 
+        Caso a mensagem seja 'System is Empty', ainda não há arquivos para este usuário.
+
         Os arquivos são expressos no seguinte formato:
             - [path/to/file1]
             - [path/to/file2]

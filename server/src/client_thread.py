@@ -22,6 +22,27 @@ class ClientThread(threading.Thread):
         self.caddress = clientAddress
         print ("New connection added: ", self.caddress)
 
+    def run(self):
+        """ Main thread function
+
+        Called after thread is started: ie. thread.start().
+        Recieves operation commands through socket and performs them.
+        """
+
+        print ("Connection from : ", self.caddress)
+        msg = ''
+        while True:
+            msg = self.recieve_text()
+            if msg=='bye':
+                print ('User ', self.username, ' at ', self.caddress , ' disconnected...')
+                break
+            # Processes an operation commands (comma separated) -----------------------------
+            split_msg = msg.split(',')
+            if split_msg[0] == 'Log-in request':
+                self.log_in_request(split_msg)
+            if split_msg[0] == 'Register request':
+                self.register_request(split_msg)
+
     def send_text(self, msg):
         """ Sends text message through socket connection """
         self.csocket.send(bytes(msg,'UTF-8'))
@@ -73,23 +94,3 @@ class ClientThread(threading.Thread):
         print('Password: {}'.format(password))
         database.register_user(username, password)
         self.send_text('Created')
-
-    def run(self):
-        """ Main thread function
-
-        Called after thread is started: ie. thread.start().
-        """
-
-        print ("Connection from : ", self.caddress)
-        msg = ''
-        while True:
-            msg = self.recieve_text()
-            if msg=='bye':
-                print ("Client at ", self.caddress , " disconnected...")
-                break
-            # Processes an operation command -----------------------------
-            split_msg = msg.split(',')
-            if split_msg[0] == 'Log-in request':
-                self.log_in_request(split_msg)
-            if split_msg[0] == 'Register request':
-                self.register_request(split_msg)

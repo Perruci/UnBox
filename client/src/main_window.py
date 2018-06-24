@@ -59,7 +59,7 @@ class MainWindow:
                     print('Try to login again...')
         self.username, self.password = username, password
 
-    def print_files(self, files_csv):
+    def show_files(self):
         """ Imprime o sistema de arquivos recebidos do servidor.
 
         Caso a mensagem seja 'System is Empty', ainda não há arquivos para este usuário.
@@ -69,6 +69,7 @@ class MainWindow:
             - [path/to/file2]
 
         """
+        files_csv = self.unbox_app.view_files()
         if files_csv == 'System is Empty':
             print('\t{}, seu sistema de arquivos ainda está vazio...'.format(self.username))
             self.files = ''
@@ -105,14 +106,13 @@ class MainWindow:
 
         if choice == '1':
             print('Visualizar seus arquivos foi a sua escolha')
-            files_csv = self.unbox_app.view_files()
-            self.print_files(files_csv)
+            self.show_files()
 
         elif choice == '2':
             print('Download de um arquivo foi a sua escolha')
             # view files is called
             files_csv = self.unbox_app.view_files()
-            self.print_files(files_csv)
+            self.show_files(files_csv)
             server_path = input('Qual o caminho para o arquivo que deseja baixar?\n-> ')
             client_path = input('Em qual caminho do seu sistema deseja armazená-lo? (a partir de: client/data/)\n-> ')
             if server_path is '':

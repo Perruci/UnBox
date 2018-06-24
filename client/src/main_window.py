@@ -46,11 +46,14 @@ class MainWindow:
         while not user_auth:
             username = input('Insira o seu nome de usuário:\n ->')
             password = input('Insira sua senha:\n ->')
-            user_auth = self.unbox_app.log_in(username, password)
-            if user_auth:
+            user_exists, password_correct = self.unbox_app.log_in(username, password)
+            if user_exists and password_correct:
                 print('User found!\n Opening your filesystem...')
-            else:
-                print('User not found...')
+                user_auth = True
+            elif user_exists and not password_correct:
+                print('Incorrect password...\nTry to login again...')
+            elif not user_exists:
+                print('Username not found...')
                 new_user = input('Create a new user? (y/n)\n->')
                 if new_user == 'y':
                     self.unbox_app.register(username, password)

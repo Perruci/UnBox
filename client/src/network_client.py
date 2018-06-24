@@ -31,14 +31,24 @@ class NetworkClient:
         self.send_text('bye')
 
     def log_in(self, username, password):
-        """ Performs user authentication between server and client """
+        """ Performs user authentication between server and client
+
+        return: Boolean tuple of user_exists and password_correct
+
+        """
+        user_exists, password_correct = False, False
         self.send_text('Log-in request,'+ username + ',' + password)
         response = self.recieve_text()
         time.sleep(1)
+
         if response == 'Found':
-            return True
-        else:
-            return False
+            user_exists, password_correct = True, True
+        elif response == 'Password incorrect':
+            user_exists, password_correct = True, False
+        elif response == 'Not Found':
+            user_exists, password_correct = False, False
+
+        return user_exists, password_correct
 
     def register(self, username, password):
         """ Requests registration of a new user to server """

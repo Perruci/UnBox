@@ -140,11 +140,8 @@ class ClientThread(threading.Thread):
             message: expected message is an array on the following format:
                 ['Log-in Request', Username, Password]
         """
-        print(message[0])
         username = message[1]
         password = message[2]
-        print('\t Username: {}'.format(username))
-        print('\t Password: {}'.format(password))
         user_exists, password_correct = database.authenticate_user(username, password)
 
         if user_exists and password_correct:

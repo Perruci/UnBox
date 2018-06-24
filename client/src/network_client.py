@@ -4,6 +4,8 @@ import time
 import socket
 import logging
 
+CLIENT_BUFF = 1024
+
 class NetworkClient:
     """ Classe NetworkClient """
 
@@ -16,8 +18,8 @@ class NetworkClient:
 # Setup ------------------------------------------------------------
     def connect(self):
         """ Connect to server """
-        self.socket_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket_client.connect((self.SERVER_ADDR, self.PORT))
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket.connect((self.SERVER_ADDR, self.PORT))
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -34,12 +36,12 @@ class NetworkClient:
 
     def send_text(self, msg):
         """ Sends text message through socket connection """
-        self.socket_client.sendall(bytes(msg,'UTF-8'))
+        self.client_socket.sendall(bytes(msg,'UTF-8'))
         self.logger.debug('Message sent from client: {}'.format(msg))
 
     def recieve_text(self):
         """ Returns string message recieved from socket interface """
-        data = self.socket_client.recv(1024)
+        data = self.client_socket.recv(CLIENT_BUFF)
         data = data.decode()
         self.logger.debug('Message recieved on client: {}'.format(data))
         return data
@@ -48,10 +50,10 @@ class NetworkClient:
         """ Sends a binary file through socket """
         try:
             with open(filename, 'rb') as file:
-                file_data = file.read(1024)
+                file_data = file.read(CLIENT_BUFF)
                 while file_data:
-                    self.socket_client.send(file_data)
-                    file_data = file.read(1024)
+                    self.client_socket.send(file_data)
+                    file_data = file.read(CLIENT_BUFF)
         except:
             self.logger.info('Error uploading through socket. Filename {}, file size: {}'.format(filename, file_size))
             return False
@@ -65,7 +67,7 @@ class NetworkClient:
             with open(filename, 'wb') as file:
                 recieved_size = 0
                 while True:
-                    data = self.socket_client.recv(1024)
+                    data = self.client_socket.recv(CLIENT_BUFF)
                     recieved_size += len(data)
                     file.write(data)
                     if recieved_size >= file_size:
@@ -80,7 +82,7 @@ class NetworkClient:
         """ Close socket connection """
         print('End of client connection')
         self.end_connection()
-        self.socket_client.close()
+        self.client_socket.close()
 
     def end_connection(self):
         """ Sends terminating message to server """

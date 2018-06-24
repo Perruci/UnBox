@@ -95,7 +95,15 @@ class ClientThread(threading.Thread):
     def recieve_file(self, filename, file_size):
         """ Recieves and saves binary file recieved by the socket """
         database.create_database_dir() # creates database directory if it doesnt exist
-        file_data = self.client_socket.recv(file_size)
+        file_data = b'' # empty bytes string
+        recieved_size = 0
+        while True:
+            new_data = self.client_socket.recv(1024)
+            recieved_size += len(new_data)
+            file_data = file_data + new_data
+            if recieved_size >= file_size:
+                break
+
         success = database.write_file_to_database(filename, file_data)
         if success:
             self.logger.info('User {} uploaded a new file, stored on the path {}'.format(self.username, filename))
@@ -111,7 +119,10 @@ class ClientThread(threading.Thread):
             return False
         try:
             with open(filename, 'rb') as file:
-                self.client_socket.sendfile(file,0)
+                file_data = file.read(1024)
+                while file_data:
+                    self.client_socket.send(file_data)
+                    file_data = file.read(1024)
         except:
             self.logger.info('Error sending file through socket. Filename {}, file size: {}'.format(filename, file_size))
             return False

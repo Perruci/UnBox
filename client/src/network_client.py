@@ -48,9 +48,12 @@ class NetworkClient:
         """ Sends a binary file through socket """
         try:
             with open(filename, 'rb') as file:
-                self.socket_client.sendfile(file,0)
+                file_data = file.read(1024)
+                while file_data:
+                    self.socket_client.send(file_data)
+                    file_data = file.read(1024)
         except:
-            self.logger.info('Erro uploading through socket. Filename {}, file size: {}'.format(filename, file_size))
+            self.logger.info('Error uploading through socket. Filename {}, file size: {}'.format(filename, file_size))
             return False
         self.logger.info('Uploaded file {} of size {} to server'.format(filename, file_size))
         return True
@@ -58,10 +61,15 @@ class NetworkClient:
     def recieve_file(self, filename, file_size):
         """ Recieves a binary file and writes to filename """
         self.logger.debug('Expecting to recieve a file of size {}'.format(file_size))
-        file_data = self.socket_client.recv(file_size)
         try:
             with open(filename, 'wb') as file:
-                file.write(file_data)
+                recieved_size = 0
+                while True:
+                    data = self.socket_client.recv(1024)
+                    recieved_size += len(data)
+                    file.write(data)
+                    if recieved_size >= file_size:
+                        break
         except:
             self.logger.info('Error: could not write to file {}'.format(filename))
             return False

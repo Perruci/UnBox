@@ -3,6 +3,7 @@
 import socket
 import threading
 import logging
+import time
 
 import database
 
@@ -71,10 +72,24 @@ class ClientThread(threading.Thread):
 
     def recieve_text(self):
         """ Returns text message recieved by the socket """
-        data = self.client_socket.recv(2048)
-        data = data.decode()
+        try:
+            data = self.client_socket.recv(2048)
+            data = data.decode()
+        except:
+            self.logger.info('Error on recieve_text at {} with data: {}'.format(self.client_address, data))
         self.logger.debug('Message recieved from client at {}: {}'.format(self.client_address, data))
         return data
+
+    def recieve_file(self, filename, file_size):
+        """ Recieves and saves binary file recieved by the socket """
+        database.create_database_dir() # creates database directory if it doesnt exist
+        file_data = self.client_socket.recv(file_size)
+        success = database.write_file_to_database(filename, file_data)
+        if success:
+            self.logger.info('User {} uploaded a new file, stored on the path {}'.format(self.username, filename))
+        else:
+            self.logger.info('Error uploading file for user {} on file {} of size {}'.format(self.username, filename, file_size))
+        return success
 
     def log_in_request(self, message):
         """ Processes a login request recieved for the client.
@@ -148,5 +163,6 @@ class ClientThread(threading.Thread):
         path_to_file = message[1]
         file_size = message[2]
         # Updates user filesystem
-        database.add_user_filesystem(self.username, path_to_file, file_size)
-        # TODO: actual file transfer
+        filename = database.add_user_filesystem(self.username, path_to_file, file_size)
+        # TODO: actual file transfer... may need to translate the filenames
+        self.recieve_file(filename, int(file_size))

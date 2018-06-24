@@ -44,6 +44,17 @@ class NetworkClient:
         self.logger.debug('Message recieved on client: {}'.format(data))
         return data
 
+    def send_file(self, filename, file_size):
+        """ Sends a binary file through socket """
+        try:
+            with open(filename, 'rb') as file:
+                self.socket_client.sendfile(file,0)
+        except:
+            self.logger.info('Erro uploading through socket. Filename {}, file size: {}'.format(filename, file_size))
+            return False
+        self.logger.info('Uploaded file {} of size {} to server'.format(filename, file_size))
+        return True
+
     def close(self):
         """ Close socket connection """
         print('End of client connection')
@@ -102,3 +113,5 @@ class NetworkClient:
         message = 'Upload request,{},{}'.format(target_path, file_size)
         self.send_text(message)
         # TODO: send the actual file
+        time.sleep(0.5)
+        self.send_file(file_path, file_size)

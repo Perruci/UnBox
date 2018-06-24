@@ -8,6 +8,7 @@ __pycache__/
 
 # Application specific
 user_data.yaml
+database/
 .DS_Store
 
 # Distribution / packaging

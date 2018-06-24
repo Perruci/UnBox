@@ -5,7 +5,9 @@ import ruamel.yaml as yaml
 import pathlib
 
 USER_DATA_FILE = 'server/user_data.yaml'
+SERVER_DATABASE_FOLDER = 'server/database/'
 
+# Files ---------------------------------------------------
 def create_dir(directory_path):
     """ Creates a directory if it doesnt exist """
     if not os.path.exists(directory_path):
@@ -16,6 +18,14 @@ def file_exists(file_path):
     file = pathlib.Path(file_path)
     return file.is_file()
 
+def path_to_filename(username, path_to_file):
+    """ Converts a path formated as path/to/file.txt to a filename, ie. path_to_file.txt """
+    filename = '{}_{}'.format(username, path_to_file)
+    filename = filename.replace('/','_')
+    print(filename)
+    return filename
+
+# YAML ----------------------------------------------------
 def load_yaml(file_path):
     """ Loads YAML file and returns its data as a dictionary """
     with open(file_path, 'r') as usernames_yaml:
@@ -30,6 +40,22 @@ def dump_yaml(file_path, data):
     with open(file_path, 'w+') as usernames_yaml:
         yaml.dump(data, usernames_yaml)
 
+# Database ---------------------------------------------------
+def create_database_dir():
+    """ Creates directory to host user files on SERVER_DATABASE_FOLDER """
+    create_dir(SERVER_DATABASE_FOLDER)
+
+def write_file_to_database(filename, bin_data):
+    """ Writes binary data for a given filename inside SERVER_DATABASE_FOLDER """
+    filename = SERVER_DATABASE_FOLDER + filename
+    try:
+        with open(filename, 'wb') as file:
+            file.write(bin_data)
+    except:
+        print('Could not write to {}'.format(filename))
+        return False
+    return True
+
 def load_user_data(username):
     """ Returns user data stored on USER_DATA_FILE """
     data = load_yaml(USER_DATA_FILE)
@@ -41,13 +67,6 @@ def update_user_data(username, new_dict):
     data[username] = new_dict
     dump_yaml(USER_DATA_FILE, data)
 
-def path_to_filename(username, path_to_file):
-    """ Converts a path formated as path/to/file.txt to a filename, ie. path_to_file.txt """
-    filename = '{}_{}'.format(username, path_to_file)
-    filename = filename.replace('/','_')
-    print(filename)
-    return filename
-
 def add_user_filesystem(username, path_to_file, file_size):
     """ Adds a new file on user data dictionary
 
@@ -55,12 +74,13 @@ def add_user_filesystem(username, path_to_file, file_size):
         path_to_file:
             size: file_size
             location: filename
+
+    return:
+        filename: filename to initiate the file recieving procedure
     """
-    # TODO: talvez transformar files em um outro dict, contendo {tamanho, nome_do_arquivo} (ou só nome do arquivo, sei lá)
     filename = path_to_filename(username, path_to_file)
     new_file = {path_to_file : {'size' : file_size, 'location' : filename}}
     user_dict = load_user_data(username)
-
     if 'files' not in user_dict:
         user_dict['files'] = new_file
     else:
@@ -69,6 +89,7 @@ def add_user_filesystem(username, path_to_file, file_size):
         user_dict['files'] = files_dict
     print('Updating {} filesystem'.format(username))
     update_user_data(username, user_dict)
+    return filename
 
 def get_user_filesystem(username):
     """ Returns given user 'files' dictionary """

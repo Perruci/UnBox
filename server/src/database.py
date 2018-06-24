@@ -4,7 +4,7 @@ import os
 import ruamel.yaml as yaml
 import pathlib
 
-USER_AUTH_FILE = 'server/user_data.yaml'
+USER_DATA_FILE = 'server/user_data.yaml'
 
 def create_dir(directory_path):
     """ Creates a directory if it doesnt exist """
@@ -31,15 +31,15 @@ def dump_yaml(file_path, data):
         yaml.dump(data, usernames_yaml)
 
 def load_user_data(username):
-    """ Returns user data stored on USER_AUTH_FILE """
-    data = load_yaml(USER_AUTH_FILE)
+    """ Returns user data stored on USER_DATA_FILE """
+    data = load_yaml(USER_DATA_FILE)
     return data.get(username)
 
 def update_user_data(username, new_dict):
     """ Updates stored user data with new_dict """
-    data = load_yaml(USER_AUTH_FILE)
+    data = load_yaml(USER_DATA_FILE)
     data[username] = new_dict
-    dump_yaml(USER_AUTH_FILE, data)
+    dump_yaml(USER_DATA_FILE, data)
 
 
 def add_user_filesystem(username, path_to_file, file_size):
@@ -57,29 +57,29 @@ def add_user_filesystem(username, path_to_file, file_size):
     update_user_data(username, user_dict)
 
 def register_user(username, password):
-    """ Append new username to USER_AUTH_FILE """
+    """ Append new username to USER_DATA_FILE """
     new_user_data = {username : {'password' : password}}
-    if file_exists(USER_AUTH_FILE):
+    if file_exists(USER_DATA_FILE):
         # Reads whole file and then updates it
-        data = load_yaml(USER_AUTH_FILE)
+        data = load_yaml(USER_DATA_FILE)
         data.update(new_user_data)
-        dump_yaml(USER_AUTH_FILE, data)
+        dump_yaml(USER_DATA_FILE, data)
     else:
         # create new file
         data = new_user_data
-        dump_yaml(USER_AUTH_FILE, data)
+        dump_yaml(USER_DATA_FILE, data)
 
 def authenticate_user(username, password):
-    """ Verify if user is listed on USER_AUTH_FILE
+    """ Verify if user is listed on USER_DATA_FILE
     return:
     Boolean tuple (user_exists, password_correct)
     """
     user_exists, password_correct = False, False
 
-    if not file_exists(USER_AUTH_FILE):
+    if not file_exists(USER_DATA_FILE):
         return user_exists, password_correct
 
-    data = load_yaml(USER_AUTH_FILE)
+    data = load_yaml(USER_DATA_FILE)
 
     if username in data:
          """ Checks for username as a key in database """

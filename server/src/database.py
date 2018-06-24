@@ -1,9 +1,15 @@
 """ Database module for UnBox application """
 
+import os
 import ruamel.yaml as yaml
 import pathlib
 
 USER_AUTH_FILE = 'server/user_data.yaml'
+
+def create_dir(directory_path):
+    """ Creates a directory if it doesnt exist """
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
 
 def file_exists(file_path):
     """ Returns true if file exists, false if it doesnt """
@@ -23,6 +29,32 @@ def dump_yaml(file_path, data):
     """ Writes data to a YAML file and replaces its contents"""
     with open(file_path, 'w+') as usernames_yaml:
         yaml.dump(data, usernames_yaml)
+
+def load_user_data(username):
+    """ Returns user data stored on USER_AUTH_FILE """
+    data = load_yaml(USER_AUTH_FILE)
+    return data.get(username)
+
+def update_user_data(username, new_dict):
+    """ Updates stored user data with new_dict """
+    data = load_yaml(USER_AUTH_FILE)
+    data[username] = new_dict
+    dump_yaml(USER_AUTH_FILE, data)
+
+
+def add_user_filesystem(username, path_to_file, file_size):
+    """ Adds a new file on user data """
+    new_file = {path_to_file : file_size}
+    user_dict = load_user_data(username)
+
+    if 'files' not in user_dict:
+        user_dict['files'] = new_file
+    else:
+        files_dict = user_dict['files']
+        files_dict.update(new_file)
+        user_dict['files'] = files_dict
+    print('Updating {} filesystem'.format(username))
+    update_user_data(username, user_dict)
 
 def register_user(username, password):
     """ Append new username to USER_AUTH_FILE """

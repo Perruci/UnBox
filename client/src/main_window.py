@@ -44,7 +44,7 @@ class MainWindow:
         """ Futuramente utilizada para realizar o login do usuário no servido """
         user_auth = False
         while not user_auth:
-            username = input('Insira o seu nome de usuário:\n ->')
+            username = input('Insira o seu nome de usuário:\n -> ')
             password = input('Insira sua senha:\n ->')
             user_exists, password_correct = self.unbox_app.log_in(username, password)
             if user_exists and password_correct:
@@ -54,7 +54,7 @@ class MainWindow:
                 print('Incorrect password...\nTry to login again...')
             elif not user_exists:
                 print('Username not found...')
-                new_user = input('Create a new user? (y/n)\n->')
+                new_user = input('Create a new user? (y/n)\n-> ')
                 if new_user == 'y':
                     self.unbox_app.register(username, password)
                     print('User {} registered with success'.format(username))
@@ -72,11 +72,11 @@ class MainWindow:
         print('\t4 - Upload de um arquivo')
         print('\t5 - Upload de uma pasta')
         print('\t6 - Encerrar sessão')
-        choice = get_choice('Qual operação deseja realizar? (1-6)\n->')
+        choice = get_choice('Qual operação deseja realizar? (1-6)\n-> ')
         while(not choice):
             """ While choice is False, repeat the request """
             print('Operação Inválida...')
-            choice = get_choice('Qual operação deseja realizar? (1-6)\n->')
+            choice = get_choice('Qual operação deseja realizar? (1-6)\n-> ')
         return choice
 
     def main_loop(self):
@@ -98,7 +98,17 @@ class MainWindow:
             print('Option 3 was your choice')
 
         elif choice == '4':
-            print('Option 4 was your choice')
+            print('Upload de um arquivo foi a sua escolha')
+            file_path = input('Qual o caminho para o arquivo que deseja enviar?\n-> ')
+            target_path = input('Em qual caminho deseja armazená-lo? (nome do arquivo incluso)\n-> ')
+            if target_path is None:
+                print('Caminho de destino inválido, tente novamente')
+            else:
+                file_exist = self.unbox_app.upload_file(file_path, target_path)
+                if file_exist:
+                    print('O upload foi realizado com sucesso')
+                else:
+                    print('O arquivo indicado no caminho ({}) não foi encontrado'.format(file_path))
 
         elif choice == '5':
             print('Option 5 was your choice')

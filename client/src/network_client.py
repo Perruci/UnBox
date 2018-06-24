@@ -78,6 +78,16 @@ class NetworkClient:
         else:
             return False
 
+    def upload_file(self, file_path, target_path, file_size):
+        """ Uploads a file to the server
+
+        Sends the message in two parts: a header containing the target file path and the file size, then the actual file.
+
+        """
+        message = 'Upload request,{},{}'.format(target_path, file_size)
+        self.send_text(message)
+        # TODO: send the actual file
+
     def close(self):
         """ Close socket connection """
         print('End of client connection')

@@ -46,6 +46,8 @@ class ClientThread(threading.Thread):
                 self.log_in_request(split_msg)
             if split_msg[0] == 'Register request':
                 self.register_request(split_msg)
+            if split_msg[0] == 'Upload request':
+                self.upload_request(split_msg)
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -113,3 +115,18 @@ class ClientThread(threading.Thread):
         database.register_user(username, password)
         self.logger.info('New Username Registered: ' + username)
         self.send_text('Created')
+
+    def upload_request(self, message):
+        """ Process an upload of file request
+
+        The next message shall be the file contents
+        arguments:
+            message: expected message is an array on the following format:
+                ['Upload request', path_to_file, file_size]
+            obs: file_size is stored as string and needs convertion
+        """
+        path_to_file = message[1]
+        file_size = message[2]
+        # Updates user filesystem
+        database.add_user_filesystem(self.username, path_to_file, file_size)
+        # TODO: actual file transfer

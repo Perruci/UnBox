@@ -45,6 +45,14 @@ def create_database_dir():
     """ Creates directory to host user files on SERVER_DATABASE_FOLDER """
     create_dir(SERVER_DATABASE_FOLDER)
 
+def get_database_file_path(filename):
+    """ Returns the filename appended to SERVER_DATABASE_FOLDER """
+    filename = SERVER_DATABASE_FOLDER + filename
+    if file_exists(filename):
+        return filename
+    else:
+        return ''
+
 def write_file_to_database(filename, bin_data):
     """ Writes binary data for a given filename inside SERVER_DATABASE_FOLDER """
     filename = SERVER_DATABASE_FOLDER + filename

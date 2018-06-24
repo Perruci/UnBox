@@ -69,6 +69,8 @@ class UnBoxClient:
         # Cria diretório solicitado pelo usuário
         client_path = get_path_from_file(client_file)
         create_folder_parents(client_path)
+        client_file = CLIENT_ROOT + client_file
+        self.client.download_file(server_file, client_file)
 
     def close(self):
         self.client.close()

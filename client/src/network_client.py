@@ -55,6 +55,19 @@ class NetworkClient:
         self.logger.info('Uploaded file {} of size {} to server'.format(filename, file_size))
         return True
 
+    def recieve_file(self, filename, file_size):
+        """ Recieves a binary file and writes to filename """
+        self.logger.debug('Expecting to recieve a file of size {}'.format(file_size))
+        file_data = self.socket_client.recv(file_size)
+        try:
+            with open(filename, 'wb') as file:
+                file.write(file_data)
+        except:
+            self.logger.info('Error: could not write to file {}'.format(filename))
+            return False
+        self.logger.info('File downloaded and writtent to {}'.format(filename))
+        return True
+
     def close(self):
         """ Close socket connection """
         print('End of client connection')
@@ -112,6 +125,22 @@ class NetworkClient:
         """
         message = 'Upload request,{},{}'.format(target_path, file_size)
         self.send_text(message)
-        # TODO: send the actual file
         time.sleep(0.5)
         self.send_file(file_path, file_size)
+
+    def download_file(self, server_file, client_file):
+        """ Downloads a file from the server
+
+        Expects the message in two parts: a header containing the target file path and the file size, then the actual file.
+        """
+        message = 'Download request,{}'.format(server_file)
+        self.send_text(message)
+        response = self.recieve_text()
+        response = response.split(',')
+        if response[0] != 'File exists':
+            self.logger.info('Error: file {} not found on server'.format(server_file))
+            return False
+        self.logger.info('File {} found on server side'.format(server_file))
+        file_size = int(response[1])
+        self.recieve_file(client_file, file_size)
+        return True

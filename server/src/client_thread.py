@@ -45,12 +45,14 @@ class ClientThread(threading.Thread):
             split_msg = msg.split(',')
             if split_msg[0] == 'Log-in request':
                 self.log_in_request(split_msg)
-            if split_msg[0] == 'Register request':
+            elif split_msg[0] == 'Register request':
                 self.register_request(split_msg)
-            if split_msg[0] == 'Upload request':
-                self.upload_request(split_msg)
-            if split_msg[0] == 'View files':
+            elif split_msg[0] == 'View files':
                 self.view_files_request()
+            elif split_msg[0] == 'Upload request':
+                self.upload_request(split_msg)
+            elif split_msg[0] == 'Download request':
+                self.download_request(split_msg)
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -90,6 +92,22 @@ class ClientThread(threading.Thread):
         else:
             self.logger.info('Error uploading file for user {} on file {} of size {}'.format(self.username, filename, file_size))
         return success
+
+    def send_file(self, server_filename, file_size):
+        """ Sends an binary file through socket """
+        filename = database.get_database_file_path(server_filename)
+        if filename == '':
+            self.logger.info('Error: requested file not found on server. filename: {}'.format(filename))
+            return False
+        try:
+            with open(filename, 'rb') as file:
+                self.client_socket.sendfile(file,0)
+        except:
+            self.logger.info('Error sending file through socket. Filename {}, file size: {}'.format(filename, file_size))
+            return False
+
+        self.logger.info('Sent file {} of size {} to client'.format(filename, file_size))
+        return True
 
     def log_in_request(self, message):
         """ Processes a login request recieved for the client.
@@ -154,7 +172,7 @@ class ClientThread(threading.Thread):
     def upload_request(self, message):
         """ Process an upload of file request
 
-        The next message shall be the file contents
+        The message shall be the file contents
         arguments:
             message: expected message is an array on the following format:
                 ['Upload request', path_to_file, file_size]
@@ -166,3 +184,25 @@ class ClientThread(threading.Thread):
         filename = database.add_user_filesystem(self.username, path_to_file, file_size)
         # TODO: actual file transfer... may need to translate the filenames
         self.recieve_file(filename, int(file_size))
+
+    def download_request(self, message):
+        """ Process a download file request
+
+        After recieving the request, the server sends and acknoledgment if file is found
+        Then performs the file trasfer.
+
+        arguments:
+            message: The message shall be of the following format
+                ['Download request', path_to_file]
+        """
+        file_requested = message[1]
+        user_files = database.get_user_filesystem(self.username)
+        if file_requested not in user_files:
+                self.send_text('File not found')
+                return
+        file_size = user_files[file_requested]['size']
+        self.send_text('File exists,{}'.format(file_size))
+        time.sleep(0.1)
+        server_filename = user_files[file_requested]['location']
+        self.send_file(server_filename, file_size)
+        time.sleep(0.1)

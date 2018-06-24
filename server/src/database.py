@@ -41,7 +41,6 @@ def update_user_data(username, new_dict):
     data[username] = new_dict
     dump_yaml(USER_DATA_FILE, data)
 
-
 def add_user_filesystem(username, path_to_file, file_size):
     """ Adds a new file on user data """
     new_file = {path_to_file : file_size}
@@ -55,6 +54,15 @@ def add_user_filesystem(username, path_to_file, file_size):
         user_dict['files'] = files_dict
     print('Updating {} filesystem'.format(username))
     update_user_data(username, user_dict)
+
+def get_user_filesystem(username):
+    """ Returns given user 'files' dictionary """
+    user_dict = load_user_data(username)
+    if 'files' not in user_dict:
+        return None
+    else:
+        files_dict = user_dict['files']
+    return files_dict
 
 def register_user(username, password):
     """ Append new username to USER_DATA_FILE """

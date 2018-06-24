@@ -31,6 +31,10 @@ class UnBoxClient:
         """ Register a new user """
         self.client.register(username, password)
 
+    def view_files(self):
+        """ Requests user filesystem """
+        return self.client.request_filesystem()
+
     def upload_file(self, file_path, target_path):
         """ Verify file existance and size, then calls a file transfer on client
         arguments:

@@ -13,7 +13,7 @@ class NetworkClient:
         self.PORT = 8888
         self.connect()
         self.logger_setup()
-
+# Setup ------------------------------------------------------------
     def connect(self):
         """ Connect to server """
         self.socket_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,10 +44,17 @@ class NetworkClient:
         self.logger.debug('Message recieved on client: {}'.format(data))
         return data
 
+    def close(self):
+        """ Close socket connection """
+        print('End of client connection')
+        self.end_connection()
+        self.socket_client.close()
+
     def end_connection(self):
         """ Sends terminating message to server """
         self.send_text('bye')
 
+# Operation Manegemt ------------------------------------------------------------
     def log_in(self, username, password):
         """ Performs user authentication between server and client
 
@@ -78,6 +85,14 @@ class NetworkClient:
         else:
             return False
 
+    def request_filesystem(self):
+        """ Request the user filesystem """
+        message = 'View files'
+        self.send_text(message)
+        response = self.recieve_text()
+        time.sleep(1)
+        return response
+
     def upload_file(self, file_path, target_path, file_size):
         """ Uploads a file to the server
 
@@ -87,9 +102,3 @@ class NetworkClient:
         message = 'Upload request,{},{}'.format(target_path, file_size)
         self.send_text(message)
         # TODO: send the actual file
-
-    def close(self):
-        """ Close socket connection """
-        print('End of client connection')
-        self.end_connection()
-        self.socket_client.close()

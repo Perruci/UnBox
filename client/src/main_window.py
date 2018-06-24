@@ -63,6 +63,18 @@ class MainWindow:
                     print('Try to login again...')
         self.username, self.password = username, password
 
+    def print_files(self, files_csv):
+        """ Imprime o sistema de arquivos recebidos do servidor.
+
+        Os arquivos são expressos no seguinte formato:
+            - [path/to/file1]
+            - [path/to/file2]
+
+        """
+        print('{}, seu sistema de arquivos atualmente consiste em:'.format(self.username))
+        files = files_csv.split(',')
+        print('\n'.join('\t - {}'.format(file) for file in files))
+
     def menu(self):
         """ Menu de opções do cliente """
         print('Nesta versão do sistema, você é capaz de:')
@@ -89,7 +101,9 @@ class MainWindow:
         choice = self.menu()
 
         if choice == '1':
-            print('Option 1 was your choice')
+            print('Visualizar seus arquivos foi a sua escolha')
+            files_csv = self.unbox_app.view_files()
+            self.print_files(files_csv)
 
         elif choice == '2':
             print('Option 2 was your choice')

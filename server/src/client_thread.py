@@ -48,6 +48,8 @@ class ClientThread(threading.Thread):
                 self.register_request(split_msg)
             if split_msg[0] == 'Upload request':
                 self.upload_request(split_msg)
+            if split_msg[0] == 'View files':
+                self.view_files_request()
 
     def logger_setup(self):
         """ Setup logging functionality """
@@ -115,6 +117,21 @@ class ClientThread(threading.Thread):
         database.register_user(username, password)
         self.logger.info('New Username Registered: ' + username)
         self.send_text('Created')
+
+    def view_files_request(self):
+        """ Process view files request
+        arguments:
+            message: expected message a single string command
+                ['View files']
+        return:
+            dictionary of files of the given user
+        """
+        user_files = database.get_user_filesystem(self.username)
+        # converts to list
+        user_files = list(user_files.keys())
+        # converts to comma separated string
+        user_files_str = ','.join(user_files)
+        self.send_text(user_files_str)
 
     def upload_request(self, message):
         """ Process an upload of file request

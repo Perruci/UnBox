@@ -45,7 +45,7 @@ class MainWindow:
         user_auth = False
         while not user_auth:
             username = input('Insira o seu nome de usuário:\n -> ')
-            password = input('Insira sua senha:\n ->')
+            password = input('Insira sua senha:\n -> ')
             user_exists, password_correct = self.unbox_app.log_in(username, password)
             if user_exists and password_correct:
                 print('User found!\n Opening your filesystem...')
@@ -101,7 +101,7 @@ class MainWindow:
             print('Upload de um arquivo foi a sua escolha')
             file_path = input('Qual o caminho para o arquivo que deseja enviar?\n-> ')
             target_path = input('Em qual caminho deseja armazená-lo? (nome do arquivo incluso)\n-> ')
-            if target_path is None:
+            if target_path is '':
                 print('Caminho de destino inválido, tente novamente')
             else:
                 file_exist = self.unbox_app.upload_file(file_path, target_path)

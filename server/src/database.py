@@ -126,7 +126,8 @@ def remove_user_file(username, filename):
     """ Removes file from database and user data """
     user_files = get_user_filesystem(username)
     if filename in user_files:
-        delete_file(user_files[filename]['location'])
+        database_file = get_database_file_path(user_files[filename]['location'])
+        delete_file(database_file)
         user_files.pop(filename)
         update_user_filesystem(username, user_files)
         return True

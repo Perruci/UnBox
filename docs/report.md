@@ -88,3 +88,23 @@ UnBox
     │   └── unbox_server.py
     └── user_data.yaml          <- Persistent User Information
 ```
+
+### Instruções de Execução
+Para a chamada adequada do sistema UnBox recomenda-se acessar o diretório root do projeto e inicializar o ambiênte virtual.
+Este procedimento deve ser realizado em cada terminal utilizado. 
+```bash
+cd path/to/UnBox
+bash scripts/init_environment.sh
+```
+Em seguida, realiza-se a chamada do programa server-side pela chamada do script run_server.sh
+```bash
+cd path/to/UnBox # caso tenha mudado o diretório
+bash scripts/run_server.sh
+```
+Para realizar a chamada do aplicação client-side pela seguinte chamada.
+```bash
+cd path/to/UnBox # caso tenha mudado o diretório
+bash scripts/run_server.sh
+```
+**Importante:** A chamada dos scripts de execução do cliente e do servidor devem ser feitas do diretorio UnBox/.
+Os caminhos relativos de arquivos importantes parte deste diretório.

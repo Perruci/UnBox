@@ -15,8 +15,8 @@ class ClientThread(threading.Thread):
     Responsável por receber um novo cliente em uma thread independente.
 
     Attributes:
-        clientAddress:
-        clientsocket:
+        clientAddress: endereço e porta de conexão do socket.
+        clientsocket: objeto socket já conectado ao cliente
     """
 
     def __init__(self,clientAddress,clientsocket):

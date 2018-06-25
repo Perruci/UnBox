@@ -129,7 +129,9 @@ class MainWindow:
                 print('Caminho de destino inválido, tente novamente')
             else:
                 file_path = file_path.strip() # removes empty spaces on begining and end
+                file_path = file_path.replace("'", '')
                 target_path = target_path.strip() # removes empty spaces on begining and end
+                file_path = file_path.replace("'", '')
                 file_exist = self.unbox_app.upload_file(file_path, target_path)
                 if file_exist:
                     print('O upload foi realizado com sucesso')

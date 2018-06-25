@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>relatorio</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+div.prism-show-language {
+	position: relative;
+}
+
+div.prism-show-language > div.prism-show-language-label {
+	color: black;
+	background-color: #CFCFCF;
+	display: inline-block;
+	position: absolute;
+	bottom: auto;
+	left: auto;
+	top: 0;
+	right: 0;
+	width: auto;
+	height: auto;
+	font-size: 0.9em;
+	border-radius: 0 0 0 5px;
+	padding: 0 0.5em;
+	text-shadow: none;
+	z-index: 1;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">UnBox: Aplicação Dropbox-like</h1>
+
+<h3 id="toc_1">Trabalho final da disciplina Transmissão de Dados 2018.1 da Universidade de Brasília (UnB-CIC)</h3>
+
+<h3 id="toc_2">Autoria</h3>
+
+<ul>
+<li><strong>Autor: Pedro Henrique Suruagy Perruci | pedro.perruci@gmail.com | 14/0158596</strong></li>
+<li>Professor: Marcos F. Caetano | mfcaetano@unb.br</li>
+<li>Monitoras:
+
+<ul>
+<li>Camila Camargo | 130104868@aluno.unb.br</li>
+<li>Mariana Makiuchi | marimakiuchi@aluno.unb.br</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_3">1. Objetivos</h3>
+
+<p>Através do desenvolvimento do sistema UnBox pretende-se aplicar os conhecimentos explorados na disciplina Transmissão de Dados.
+Os principais conceitos trabalhados são a implementação de um sistema na camada de aplicação do modelo OSI e o desenvolvimento de um protocolo de comunicação simplificado cliente-servidor capaz de realizar as operações especificadas.
+Os conceitos chaves da aplicação são a <strong>sincronização</strong> e o <strong>armazenamento</strong> de arquivos do usuário.</p>
+
+<p>Ao lidar com a manipulação de arquivos e o acesso concorrente ao servidor também é possivel relembrar, ou adiantar, conceitos das disciplinas de Organização de Arquivos e Processamento em Tempo Real, embora não sejam o foco deste trabalho.</p>
+
+<h3 id="toc_4">2. Especificações</h3>
+
+<p>Tendo como referência as especificações propostas no roteiro do trabalho, estipulou-se os seguintes requisitos para o sistema:</p>
+
+<ol>
+<li>Aplicação em linha de comando compatível com sisetmas linux;</li>
+<li>Cliente e servidor se comunicam em rede e operam em pastas diferentes;</li>
+<li>O servidor é capaz de atender múltiplos clientes simultâneamente;</li>
+<li>Sincronização entre arquivos no cliente e servidor de forma persistente;</li>
+<li>Operações realizadas tanto no cliente, como no servidor são armazenadas em arquivos log.</li>
+</ol>
+
+<p>Estas especificações serão abordadas individualmente nas seções seguintes.</p>
+
+<h4 id="toc_5">2.1 Linguagem e Dependências</h4>
+
+<p>O sistema foi desenvolvido na linguagem Python 3.6.5, em ambiente OSX 10.13.5.
+O funcionamento do sistema em sistema Ubuntu 16.04 foi verificado como adequado.</p>
+
+<p>Todas as dependências foram armazenadas em um ambiente virtual <a href="https://docs.pipenv.org">Pipenv</a>.
+Portanto para a execução da aplicação é necessária apenas a instalação do ambiente virtual.</p>
+
+<div><pre><code class="language-bash">sudo apt-get install -y python3-pip
+pip3 install pipenv</code></pre></div>
+
+<p>Uma lista completa dos módulos utilizadas no sistema está expressa a seguir:
+* Python 3.6.5
+    * ruamel.yaml (pipenv)
+    * socket
+    * threading
+    * logging
+    * time
+    * sys
+    * os</p>
+
+<h4 id="toc_6">2.2 Disposição de Arquivos</h4>
+
+<p>A disposição de arquivos esperada ao executar-se o sistema está disposta a seguir.
+Os arquivos destacados são criados durante a execução da aplicação e desempenham função essencial no sistema.
+Note que a pasta &#39;UnBox/scripts&#39; contém alguns arquivos executáveis úteis para a utilização e manutenção da aplicação</p>
+
+<div><pre><code class="language-none">UnBox
+├── LICENSE
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── client
+│   ├── client_history.log     &lt;- Client Log
+│   ├── home
+│   │   └── [Client Workspace] &lt;- Client Workspace
+│   └── src
+│       ├── main.py
+│       ├── main_window.py
+│       ├── network_client.py
+│       └── unbox_client.py
+├── scripts
+│   ├── clean_logs.sh
+│   ├── clean_user_data.sh
+│   ├── init_environment.sh
+│   ├── run_client.sh
+│   └── run_server.sh
+└── server
+    ├── database                &lt;- Server Database
+    │   └── [Server Files]
+    ├── server_history.log      &lt;- Server Log
+    ├── src
+    │   ├── client_thread.py
+    │   ├── database.py
+    │   ├── main.py
+    │   ├── server_network.py
+    │   └── unbox_server.py
+    └── user_data.yaml          &lt;- Persistent User Information</code></pre></div>
+
+<h4 id="toc_7">2.3 Instruções de Execução</h4>
+
+<p>Para a chamada adequada do sistema UnBox recomenda-se acessar o diretório root do projeto e inicializar o ambiênte virtual.
+Este procedimento deve ser realizado em cada terminal utilizado.</p>
+
+<div><pre><code class="language-bash">cd path/to/UnBox
+bash scripts/init_environment.sh</code></pre></div>
+
+<p>Em seguida, realiza-se a chamada do programa server-side pela chamada do script run_server.sh</p>
+
+<div><pre><code class="language-bash">cd path/to/UnBox # caso tenha mudado o diretório
+bash scripts/run_server.sh</code></pre></div>
+
+<p>Para realizar a chamada do aplicação client-side pela seguinte chamada.</p>
+
+<div><pre><code class="language-bash">cd path/to/UnBox # caso tenha mudado o diretório
+bash scripts/run_server.sh</code></pre></div>
+
+<p><strong>Importante 1:</strong> A chamada dos scripts de execução do cliente e do servidor devem ser feitas do diretorio UnBox/.
+Os caminhos relativos de arquivos importantes parte d   este diretório.</p>
+
+<p><strong>Importante 2:</strong> O programa do servidor deve ser sempre chamado antes do programa cliente. Caso o servidor não esteja ativo, o programa cliente não se inicializará.</p>
+
+<p><strong>Importante 3:</strong> O download de arquivos não suporta caminhos para o arquivo com espaços.</p>
+
+<h3 id="toc_8">3. Exemplo de Execução</h3>
+
+<p>Além do passo a passo apresentado nesta seção, também registrou-se um vídeo do sistema em funcionamento.
+O vídeo pode ser acessado por meio do <a href="https://youtu.be/8UaEr20ok-c">link</a>:</p>
+
+<div><pre><code class="language-none">https://youtu.be/8UaEr20ok-c</code></pre></div>
+
+<h4 id="toc_9">3.1 Autenticação de Usuário</h4>
+
+<p>A autenticação com o usuário é realizada por meio de uma requisição ao servidor.
+Um exemplo de autenticação de usuário pode ser analizado a seguir:</p>
+
+<div><pre><code class="language-none">Bem vindo ao sistema UnBox
+
+Para ter acesso aos seus dados é necessário efetuar o login.
+Caso ainda não tenha uma conta, iremos criar uma para você.
+
+Insira o seu nome de usuário:
+ -&gt; Pedro
+Insira sua senha:
+ -&gt; senha
+Username not found...
+Create a new user? (y/n)
+-&gt; y
+User Pedro registered with success</code></pre></div>
+
+<h4 id="toc_10">3.2 Janela Principal</h4>
+
+<p>A interface de usuário desenvolvida baseia-se na linha de comando e em operações discretas listadas na janela principal. Sua chamada padrão pode ser observada no seguinte trecho de execução da aplicação:</p>
+
+<div><pre><code class="language-none">Olá Pedro o/
+Nesta versão do sistema, você é capaz de:
+    1 - Visualizar seus arquivos
+    2 - Download de um arquivo
+    3 - Upload de um arquivo
+    4 - Mover um arquivo
+    5 - Deletar um arquivo
+    6 - Encerrar sessão
+Qual operação deseja realizar? (1-6)
+-&gt;</code></pre></div>
+
+<p>Cabe ao usuário selecionar a operação que deseja realizar ao inserir um valor de 1-6.</p>
+
+<h4 id="toc_11">3.3 Upload de um Arquivo</h4>
+
+<p>A primeira coisa a fazer é adicionar um arquivo ao sistema UnBox.
+Para tanto, siga o procedimento a seguir.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 3
+Upload de um arquivo foi a sua escolha
+Qual o caminho para o arquivo que deseja enviar?
+-&gt; /Users/pedroperruci/Desktop/github/UnBox/docs/roteiro.pdf
+Em qual caminho deseja armazená-lo? (nome do arquivo incluso)
+-&gt; td/trabalho/roteiro
+O upload foi realizado com sucesso</code></pre></div>
+
+<p>Note que é possivel adicionar arquivos arrastando-os do file-manager para o terminal.
+Ainda assim, existe uma limitação... lembre-se do <strong>Importante 3</strong> exposto na seção 2.3.</p>
+
+<p>Para verificar como encontra-se o nosso sistema de arquivos, digite 1 no menu principal.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 1
+Visualizar seus arquivos foi a sua escolha
+pedro, seu sistema de arquivos atualmente consiste em:
+     - td/trabalho/roteiro</code></pre></div>
+
+<p>Note que o cliente possui total liberdade para criar o sistema de arquivos que lhe interessa no sistema UnBox!</p>
+
+<h4 id="toc_12">3.4 Download de um Arquivo</h4>
+
+<p>Para realizar o download do roteiro do trabalho, caso tenha-o deletado sem querer, digite a opção 2 do menu principal.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 2
+Download de um arquivo foi a sua escolha
+pedro, seu sistema de arquivos atualmente consiste em:
+     - td/trabalho/roteiro
+
+Qual o caminho para o arquivo que deseja baixar?
+-&gt; td/trabalho/roteiro
+Em qual caminho do seu sistema deseja armazená-lo? (a partir de: client/data/)
+-&gt; td/roteiro.pdf</code></pre></div>
+
+<p>Em seguida, constate que o diretório <em>client/home/td</em> foi criado e contêm o arquivo <em>roteiro.pdf</em> !</p>
+
+<h4 id="toc_13">3.5 Mover Arquivo</h4>
+
+<p>Para mover um arquivo, digite a opção 4 no menu principal.
+O procedimento será equvalente ao exposto em seguida:</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 4
+Mover um arquivo foi a sua escolha
+pedro, seu sistema de arquivos atualmente consiste em:
+     - td/trabalho/roteiro
+
+Qual o caminho do arquivo que deseja mover?
+-&gt; td/trabalho/roteiro
+Qual o caminho de destino do arquivo?
+-&gt; td/trabalho/roteiro.pdf
+O arquivo foi movido com sucesso</code></pre></div>
+
+<p>Para verificar a mudança, digite 1 no menu principal.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 1
+Visualizar seus arquivos foi a sua escolha
+pedro, seu sistema de arquivos atualmente consiste em:
+     - td/trabalho/roteiro.pdf</code></pre></div>
+
+<h4 id="toc_14">3.6 Remover Arquivo</h4>
+
+<p>Remover um arquivo envolve um procedimento semelhante à movê-lo.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 5
+Deletar um arquivo foi a sua escolha
+pedro, seu sistema de arquivos atualmente consiste em:
+     - td/trabalho/roteiro.pdf
+
+Qual o caminho para o arquivo que deseja remover?
+-&gt; td/trabalho/roteiro.pdf
+O arquivo foi removido com sucesso</code></pre></div>
+
+<p>Para verificar a mudança, digite 1 no menu principal.</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 1
+Visualizar seus arquivos foi a sua escolha
+    pedro, seu sistema de arquivos ainda está vazio...</code></pre></div>
+
+<h4 id="toc_15">3.7 Encerrar Programa</h4>
+
+<p>Para encerrar o programa, basta digitar a opção 6.</p>
+
+<p>Cliente:</p>
+
+<div><pre><code class="language-none">Qual operação deseja realizar? (1-6)
+-&gt; 6
+Saindo do programa...
+End of client connection</code></pre></div>
+
+<p>Servidor:</p>
+
+<div><pre><code class="language-none">User pedro at (&#39;127.0.0.1&#39;, 54847) disconnected...</code></pre></div>
+
+<h3 id="toc_16">4. Protocolo de Comunicação</h3>
+
+<p>O proposto protocolo de comunicação é baseado em requisições realizadas pelo cliente e recebidas pelo servidor. Dessa maneira, um dos desafios do foi desenvolver uma aplicação orientada a eventos no servidor para que este monitore os possíveis clientes e realize as operações especificadas.</p>
+
+<h4 id="toc_17">4.1 Modelagem em Máquina de Estados</h4>
+
+<p>A modelagem em máquina de estados está representada no fluxograma a seguir.
+A figura representa o estado do sistema assim que um novo cliente executa a aplicação e solicita a conexão ao servidor. Um breve resumo das funcionalidades será exposto para explicar o fluxograma.</p>
+
+<p>Analisando o &quot;Server Side&quot;, após receber uma solicitação de conexão TCP é criada uma nova thread para se conectar ao cliente. Em seguida, esta thread entra em modo idle, em que espera requisições do cliente. Ao receber requisições, realiza as operações necessárias acessando o banco de dados.</p>
+
+<p>Já no client side, assim que a conexão com o servidor é estabelecida, solicita-se a autenticação do usuário. O par nome de usuário e senha são enviados para o servidor em uma requisição este confere os dados com os armazenados no arquivo <em>user_data.yaml</em>. A partir de então, acessa-se a janela principal do cliente, em que é possível solicitar as operações especificadas do servidor.</p>
+
+<p><img src="img/TD_ClientConnection.png" alt="Client-server fluxogram" title="Client-server fluxogram"></p>
+
+<h4 id="toc_18">4.2 Características da Conexão</h4>
+
+<p>A conexão é estabelecida por meio de sockets TCP/IP entre os objetos <strong>ClientThread</strong> e <strong>NetworkClient</strong> no server side e client side, respectivamente. Vale notar que <strong>NetworkClient</strong> é um objeto de <strong>UnBoxClient</strong>, que faz a interface entre comunicação em rede e a interface de usuário <strong>MainWindow</strong>.</p>
+
+<p>O trecho de código responsável por realizar a conexão no lado do cliente é chamado no construtor da classe <strong>NetworkClient</strong>. O endereço escolhido é deixado como padrão, o localhost, e a porta foi arbitrariamente escolhida como <em>8888</em>.</p>
+
+<div><pre><code class="language-python"># trecho extraído de client/src/network_client.py
+class NetworkClient:
+    &quot;&quot;&quot; Classe NetworkClient &quot;&quot;&quot;
+
+    def __init__(self):
+        &quot;&quot;&quot; Construtor &quot;&quot;&quot;
+        self.SERVER_ADDR = &#39;&#39; # localhost
+        self.PORT = 8888
+        self.connect()
+        self.logger_setup()
+    def connect(self):
+        &quot;&quot;&quot; Connect to server &quot;&quot;&quot;
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket.connect((self.SERVER_ADDR, self.PORT))
+...</code></pre></div>
+
+<p>Já no lado do servidor, a solicitação de conexão é capturada pelo objeto <strong>ServerNetwork</strong>, que então designa um objeto <strong>ClientThread</strong> para efetivar a conexão em uma outra thread.</p>
+
+<div><pre><code class="language-python"># trecho extraído de server/src/server_network.py
+class ServerNetwork:
+    &quot;&quot;&quot; Classe ServerNetwork &quot;&quot;&quot;
+
+    def __init__(self):
+        &quot;&quot;&quot; Construtor &quot;&quot;&quot;
+        self.LOCALHOST = &#39;&#39;
+        self.PORT = 8888
+        self.threads = []
+
+    def setup(self):
+        &quot;&quot;&quot; Setup server network connections &quot;&quot;&quot;
+        # Server network setup
+        self.socket_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket_server.bind((self.LOCALHOST, self.PORT))
+        print(&quot;Server started&quot;)
+        print(&quot;Waiting for client request..&quot;)
+
+    def monitor(self):
+        &quot;&quot;&quot; Monitors new clients and starts a client thread for each one &quot;&quot;&quot;
+        self.socket_server.listen(1)
+        clientsock, clientAddress = self.socket_server.accept()
+        newthread = client_thread.ClientThread(clientAddress, clientsock)
+        newthread.start()
+        self.threads.append(newthread)
+...</code></pre></div>
+
+<p>A chamada <code>newthread.start()</code> efetiva a execução do método <code>ClientThread.run()</code> definido na classe <strong>ClientThread</strong>.</p>
+
+<div><pre><code class="language-python"># trecho extraído de server/src/client_thread.py
+class ClientThread(threading.Thread):
+    &quot;&quot;&quot; Classe ClientThread
+
+    Responsável por receber um novo cliente em uma thread independente.
+
+    Attributes:
+        clientAddress: endereço e porta de conexão do socket.
+        clientsocket: objeto socket já conectado ao cliente
+    &quot;&quot;&quot;
+
+    def __init__(self,clientAddress,clientsocket):
+        &quot;&quot;&quot; Contrutor da classe. &quot;&quot;&quot;
+        threading.Thread.__init__(self)
+        self.client_socket = clientsocket
+        self.client_address = clientAddress
+        self.logger_setup()
+        self.logger.info(&#39;Connection to client at {}&#39;.format(self.client_address))
+        print(&#39;New connection added: &#39;, self.client_address)
+
+
+    def run(self):
+        &quot;&quot;&quot; Main thread function
+
+        Called after thread is started: ie. thread.start().
+        Recieves operation commands through socket and performs them.
+        &quot;&quot;&quot;
+
+        print (&#39;Connection from : {}&#39;.format(self.client_address))
+        message = &#39;&#39;
+        while True:
+</code></pre></div>
+
+<h4 id="toc_19">4.3 Tipos de Requisição</h4>
+
+<p>Cada operação que o usuário pode realizar, expressos no menu da seção 3.2, representam uma troca de mensages distinta entre cliente e servidor. Os tipos de mensagem que podem ser trocados entre cliente e servidor estão expressos a seguir. Todas as requisições são trocadas pelos objetos <strong>NetworkClient</strong> e <strong>ClientThread</strong> para o cliente e o servidor, respectivamente.</p>
+
+<div><pre><code class="language-none">Client Side                                     Server Side
+    [&#39;Log-in Request&#39;, Username, Password]          &#39;Found&#39; or &#39;Not found&#39; or
+                                                    &#39;Password incorrect&#39;
+    [&#39;Register request&#39;, Username, Password]        &#39;Created&#39;
+    [&#39;View files&#39;]                                  [user_files_str] or &#39;System is Empty&#39;
+    [&#39;Upload request&#39;, path_to_file, file_size]     -
+    [&#39;Download request&#39;, path_to_file]              &#39;File exists,{}&#39;.format(file_size) or
+                                                    [&#39;File not found&#39;]
+    [&#39;Move request&#39;,original_filename,...           &#39;Move succeeded&#39; or &#39;File not found&#39;
+    target_filename]
+    [&#39;Remove request&#39;,filename].                    &#39;Remove succeeded&#39; or &#39;File not found&#39;
+    &#39;bye&#39;                                            -
+</code></pre></div>
+
+<p>Ao ler a maior parte das requisições e respostas, já é possível inferir seu significado. As menos intuitivas pode ser &#39;bye&#39; que encerra a conexão tanto na thread do servidor, como no cliente.</p>
+
+<h3 id="toc_20">5. Banco de Dados</h3>
+
+<p>O banco de dados é de acesso exclusivo do servidor. Ele consiste tanto do diretório <em>server/database/</em>, como do arquivo <em>server/user_data.yaml</em>.</p>
+
+<h4 id="toc_21">5.1 Arquivos do Servidor</h4>
+
+<p>Os arquivos recebidos por upload de clientes são todos armasenados no diretório <em>server/database</em>. Embora o cliente possa solicitar uma estrutura de arquivos complexa, ela não é representada no servidor. Os arquivos são simplesmente renomeados para evitar o conflito de multiplos arquivos com um mesmo nome.</p>
+
+<p>O formato de conversão de nome de arquivo para armazenamento no servidor é realizada pela função <em>database.path<em>to</em>filename</em> para ajustar o nome do arquivo ao padrão do servidor. Ela substitui todas as instâncias de &#39;/&#39; por &#39;_&#39; e adiciona o nome de usuário ao início do nome.</p>
+
+<p>Dessa forma,</p>
+
+<div><pre><code class="language-python">username, path_to_file = &#39;Pedro&#39;, &#39;td/trabalho/roteiro.pdf&#39;
+database.path_to_filename(username, path_to_file)
+returns:
+    Pedro_td_trabalho_roteiro.pdf</code></pre></div>
+
+<h4 id="toc_22">5.2 Dados do Usuário</h4>
+
+<p>Os dados de acesso dos usuários do UnBox são persistentes, isso significa que permanecem armazenados mesmo após o término da execução tanto do programa cliente, como do servidor. Estes dados são armazenados no arquivo <em>server/user_data.yaml</em> no seguinte formato:</p>
+
+<div><pre><code class="language-yaml">username:
+    &#39;files&#39;:
+        file_name_shown_to_client: {&#39;location&#39;: real_file_name, &#39;size&#39;: file_size}
+    password: user_password</code></pre></div>
+
+<p>Note que os dados de usuário são armazenados em um dicionário python, cujas chaves são os nomes de usuário e os valores são &#39;password&#39; e &#39;files&#39;. Enquanto username[&#39;password&#39;] aponta para uma string user_password, username[&#39;files&#39;] aponta para um outro dicionário. As chaves deste dicionário são os nomes de arquivos enviados e mostrados aos clientes e, por meio delas, pode-se obter sua localização no servidor e o seu tamanho.</p>
+
+<p>Os arquivos enviados pelos usuários são salvos no caminho</p>
+
+<div><pre><code class="language-none">server/database/ + username[&#39;files&#39;][file_name_shown_to_client][&#39;location&#39;]</code></pre></div>
+
+<p>Ou, resumidamente</p>
+
+<div><pre><code class="language-none">server/database/ + real_file_name</code></pre></div>
+
+<p>No exemplo da seção 5.1:</p>
+
+<div><pre><code class="language-none">server/database/Pedro_td_trabalho_roteiro.pdf</code></pre></div>
+
+<h3 id="toc_23">6. Logs</h3>
+
+<p>Foi implementado um sistema de log capaz de registrar as mensagens de texto trocadas entre cliente e servidor, assim como diversas informações de DEBUG. O log foi implementado na classe <strong>NetworkClient</strong> no lado do cliente e na classe <strong>ClientThread</strong> no lado do servidor. Seus respectivos arquivos de log são <em>client/client_history.log</em> e <em>server/server_history.log</em></p>
+
+<p>Um exemplo do log registrado no cliente pode ser visto a seguir. Foi feita uma quebra de linha após as flags de INFO e DEBUG para caber na tela.</p>
+
+<div><pre><code class="language-none">2018-06-25 01:39:51,779 - network_client - DEBUG
+- Message sent from client: Log-in request,pedro,senha
+2018-06-25 01:39:51,782 - network_client - DEBUG
+- Message recieved on client: Found
+2018-06-25 01:40:18,248 - network_client - DEBUG
+- Message sent from client: Upload request,td/trabalho/roteiro.pdf,381040
+2018-06-25 01:40:18,756 - network_client - INFO
+- Uploaded file /Users/pedroperruci/Desktop/github/UnBox/client/home/td/roteiro.pdf of size 381040 to server
+2018-06-25 01:40:22,117 - network_client - DEBUG
+- Message sent from client: bye</code></pre></div>
+
+<p>Agora, um exemplo do log salvo no lado do servidor</p>
+
+<div><pre><code class="language-none">2018-06-25 01:39:51,782 - client_thread - INFO
+- User access authenticated pedro
+2018-06-25 01:40:18,248 - client_thread - DEBUG
+- Message recieved from client at (&#39;127.0.0.1&#39;, 54946): Upload request,td/trabalho/roteiro.pdf,381040
+2018-06-25 01:40:18,248 - client_thread - DEBUG
+- Message recieved from client at (&#39;127.0.0.1&#39;, 54946): Upload request,td/trabalho/roteiro.pdf,381040
+2018-06-25 01:40:18,786 - client_thread - INFO
+- User pedro uploaded a new file, stored on the path pedro_td_trabalho_roteiro.pdf
+2018-06-25 01:40:18,786 - client_thread - INFO
+- User pedro uploaded a new file, stored on the path pedro_td_trabalho_roteiro.pdf
+2018-06-25 01:40:22,117 - client_thread - DEBUG
+- Message recieved from client at (&#39;127.0.0.1&#39;, 54946): bye</code></pre></div>
+
+<h3 id="toc_24">7. Conclusões</h3>
+
+<p>O trabalho foi uma oportunidade interessante de aprofundar os conhecimentos quanto à implementação de protocolos de redes em baixo nível. Acredita-se que os objetivos propostos foram alcançados, uma vez que prõe-se uma aplicação em rede capaz de sincronizar diversos usuários e gerenciar seus arquivos de forma persistente.</p>
+
+<h4 id="toc_25">7.1 Desafios Encontrados</h4>
+
+<p>A realização da programação orientada a eventos para o servidor foi certamente um desafio, pois contrasta com a programação sequêncial que somos habituados. A competição por recursos das diferentes Threads, principalmente do arquivo <em>server/user_data.yaml</em>, foi um caso ainda não tratado.</p>
+
+<p>Outro desafio que vale mencionar foi a própria linguagem Python e suas particularidades.</p>
+
+<h4 id="toc_26">7.2 Trabalhos Futuros</h4>
+
+<p>Restaria pouco para implementar funcionalidades de upload e download de pastas. Uma abordagem com <em>list comprehension</em> entre os arquivos do diretório e as funções de download e upload já desenvolvidas poderia ser bem sucedida. A implementação de um diretório compartilhado, cujo estado é monitorado pelo programa permanece um desafio.</p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.yaml={scalar:{pattern:/([\-:]\s*(![^\s]+)?[ \t]*[|>])[ \t]*(?:((?:\r?\n|\r)[ \t]+)[^\r\n]+(?:\3[^\r\n]+)*)/,lookbehind:!0,alias:"string"},comment:/#.*/,key:{pattern:/(\s*[:\-,[{\r\n?][ \t]*(![^\s]+)?[ \t]*)[^\r\n{[\]},#]+?(?=\s*:\s)/,lookbehind:!0,alias:"atrule"},directive:{pattern:/(^[ \t]*)%.+/m,lookbehind:!0,alias:"important"},datetime:{pattern:/([:\-,[{]\s*(![^\s]+)?[ \t]*)(\d{4}-\d\d?-\d\d?([tT]|[ \t]+)\d\d?:\d{2}:\d{2}(\.\d*)?[ \t]*(Z|[-+]\d\d?(:\d{2})?)?|\d{4}-\d{2}-\d{2}|\d\d?:\d{2}(:\d{2}(\.\d*)?)?)(?=[ \t]*($|,|]|}))/m,lookbehind:!0,alias:"number"},"boolean":{pattern:/([:\-,[{]\s*(![^\s]+)?[ \t]*)(true|false)[ \t]*(?=$|,|]|})/im,lookbehind:!0,alias:"important"},"null":{pattern:/([:\-,[{]\s*(![^\s]+)?[ \t]*)(null|~)[ \t]*(?=$|,|]|})/im,lookbehind:!0,alias:"important"},string:{pattern:/([:\-,[{]\s*(![^\s]+)?[ \t]*)("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')(?=[ \t]*($|,|]|}))/m,lookbehind:!0},number:{pattern:/([:\-,[{]\s*(![^\s]+)?[ \t]*)[+\-]?(0x[\da-f]+|0o[0-7]+|(\d+\.?\d*|\.?\d+)(e[\+\-]?\d+)?|\.inf|\.nan)[ \t]*(?=$|,|]|})/im,lookbehind:!0},tag:/![^\s]+/,important:/[&*][\w]+/,punctuation:/---|[:[\]{}\-,|>?]|\.\.\./};
+</script>
+
+<script type="text/javascript">
+Prism.languages.python={"triple-quoted-string":{pattern:/"""[\s\S]+?"""|'''[\s\S]+?'''/,alias:"string"},comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},string:/("|')(?:\\?.)*?\1/,"function":{pattern:/((?:^|\s)def[ \t]+)[a-zA-Z_][a-zA-Z0-9_]*(?=\()/g,lookbehind:!0},"class-name":{pattern:/(\bclass\s+)[a-z0-9_]+/i,lookbehind:!0},keyword:/\b(?:as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|pass|print|raise|return|try|while|with|yield)\b/,"boolean":/\b(?:True|False)\b/,number:/\b-?(?:0[bo])?(?:(?:\d|0x[\da-f])[\da-f]*\.?\d*|\.\d+)(?:e[+-]?\d+)?j?\b/i,operator:/[-+%=]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]|\b(?:or|and|not)\b/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+!function(e){var t={variable:[{pattern:/\$?\(\([\w\W]+?\)\)/,inside:{variable:[{pattern:/(^\$\(\([\w\W]+)\)\)/,lookbehind:!0},/^\$\(\(/],number:/\b-?(?:0x[\dA-Fa-f]+|\d*\.?\d+(?:[Ee]-?\d+)?)\b/,operator:/--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,punctuation:/\(\(?|\)\)?|,|;/}},{pattern:/\$\([^)]+\)|`[^`]+`/,inside:{variable:/^\$\(|^`|\)$|`$/}},/\$(?:[a-z0-9_#\?\*!@]+|\{[^}]+\})/i]};e.languages.bash={shebang:{pattern:/^#!\s*\/bin\/bash|^#!\s*\/bin\/sh/,alias:"important"},comment:{pattern:/(^|[^"{\\])#.*/,lookbehind:!0},string:[{pattern:/((?:^|[^<])<<\s*)(?:"|')?(\w+?)(?:"|')?\s*\r?\n(?:[\s\S])*?\r?\n\2/g,lookbehind:!0,inside:t},{pattern:/(["'])(?:\\\\|\\?[^\\])*?\1/g,inside:t}],variable:t.variable,"function":{pattern:/(^|\s|;|\||&)(?:alias|apropos|apt-get|aptitude|aspell|awk|basename|bash|bc|bg|builtin|bzip2|cal|cat|cd|cfdisk|chgrp|chmod|chown|chroot|chkconfig|cksum|clear|cmp|comm|command|cp|cron|crontab|csplit|cut|date|dc|dd|ddrescue|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|du|egrep|eject|enable|env|ethtool|eval|exec|expand|expect|export|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|getopts|git|grep|groupadd|groupdel|groupmod|groups|gzip|hash|head|help|hg|history|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|jobs|join|kill|killall|less|link|ln|locate|logname|logout|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|make|man|mkdir|mkfifo|mkisofs|mknod|more|most|mount|mtools|mtr|mv|mmv|nano|netstat|nice|nl|nohup|notify-send|nslookup|open|op|passwd|paste|pathchk|ping|pkill|popd|pr|printcap|printenv|printf|ps|pushd|pv|pwd|quota|quotacheck|quotactl|ram|rar|rcp|read|readarray|readonly|reboot|rename|renice|remsync|rev|rm|rmdir|rsync|screen|scp|sdiff|sed|seq|service|sftp|shift|shopt|shutdown|sleep|slocate|sort|source|split|ssh|stat|strace|su|sudo|sum|suspend|sync|tail|tar|tee|test|time|timeout|times|touch|top|traceroute|trap|tr|tsort|tty|type|ulimit|umask|umount|unalias|uname|unexpand|uniq|units|unrar|unshar|uptime|useradd|userdel|usermod|users|uuencode|uudecode|v|vdir|vi|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yes|zip)(?=$|\s|;|\||&)/,lookbehind:!0},keyword:{pattern:/(^|\s|;|\||&)(?:let|:|\.|if|then|else|elif|fi|for|break|continue|while|in|case|function|select|do|done|until|echo|exit|return|set|declare)(?=$|\s|;|\||&)/,lookbehind:!0},"boolean":{pattern:/(^|\s|;|\||&)(?:true|false)(?=$|\s|;|\||&)/,lookbehind:!0},operator:/&&?|\|\|?|==?|!=?|<<<?|>>|<=?|>=?|=~/,punctuation:/\$?\(\(?|\)\)?|\.\.|[{}[\];]/};var a=t.variable[1].inside;a["function"]=e.languages.bash["function"],a.keyword=e.languages.bash.keyword,a.boolean=e.languages.bash.boolean,a.operator=e.languages.bash.operator,a.punctuation=e.languages.bash.punctuation}(Prism);
+</script>
+
+<script type="text/javascript">
+!function(){if("undefined"!=typeof self&&self.Prism&&self.document){var e={html:"HTML",xml:"XML",svg:"SVG",mathml:"MathML",css:"CSS",clike:"C-like",javascript:"JavaScript",abap:"ABAP",actionscript:"ActionScript",apacheconf:"Apache Configuration",apl:"APL",applescript:"AppleScript",asciidoc:"AsciiDoc",aspnet:"ASP.NET (C#)",autoit:"AutoIt",autohotkey:"AutoHotkey",basic:"BASIC",csharp:"C#",cpp:"C++",coffeescript:"CoffeeScript","css-extras":"CSS Extras",fsharp:"F#",glsl:"GLSL",http:"HTTP",inform7:"Inform 7",json:"JSON",latex:"LaTeX",lolcode:"LOLCODE",matlab:"MATLAB",mel:"MEL",nasm:"NASM",nginx:"nginx",nsis:"NSIS",objectivec:"Objective-C",ocaml:"OCaml",parigp:"PARI/GP",php:"PHP","php-extras":"PHP Extras",powershell:"PowerShell",jsx:"React JSX",rest:"reST (reStructuredText)",sas:"SAS",sass:"Sass (Sass)",scss:"Sass (Scss)",sql:"SQL",typescript:"TypeScript",vhdl:"VHDL",vim:"vim",wiki:"Wiki markup",yaml:"YAML"};Prism.hooks.add("before-highlight",function(s){var a=s.element.parentNode;if(a&&/pre/i.test(a.nodeName)){var t,i,r=a.getAttribute("data-language")||e[s.language]||s.language.substring(0,1).toUpperCase()+s.language.substring(1),l=a.previousSibling;l&&/\s*\bprism-show-language\b\s*/.test(l.className)&&l.firstChild&&/\s*\bprism-show-language-label\b\s*/.test(l.firstChild.className)?i=l.firstChild:(t=document.createElement("div"),i=document.createElement("div"),i.className="prism-show-language-label",t.className="prism-show-language",t.appendChild(i),a.parentNode.insertBefore(t,a)),i.innerHTML=r}})}}();
+</script>
+
+
+</body>
+
+</html>

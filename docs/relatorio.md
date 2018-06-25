@@ -126,7 +126,8 @@ Os caminhos relativos de arquivos importantes parte d   este diretório.
 ### 3. Exemplo de Execução
 
 Além do passo a passo apresentado nesta seção, também registrou-se um vídeo do sistema em funcionamento.
-O vídeo pode ser acessado por meio do link:
+O vídeo pode ser acessado por meio do [link](https://youtu.be/8UaEr20ok-c):
+
     https://youtu.be/8UaEr20ok-c
 
 #### 3.1 Autenticação de Usuário

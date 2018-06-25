@@ -11,7 +11,7 @@ class NetworkClient:
 
     def __init__(self):
         """ Construtor """
-        self.SERVER_ADDR = ''
+        self.SERVER_ADDR = '' # localhost
         self.PORT = 8888
         self.connect()
         self.logger_setup()

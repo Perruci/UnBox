@@ -25,6 +25,13 @@ def path_to_filename(username, path_to_file):
     print(filename)
     return filename
 
+def delete_file(filename):
+    """ Deletes a file given its filename """
+    try:
+        os.remove(filename)
+    except OSError:
+        pass
+
 # YAML ----------------------------------------------------
 def load_yaml(file_path):
     """ Loads YAML file and returns its data as a dictionary """
@@ -114,6 +121,17 @@ def get_user_filesystem(username):
     else:
         files_dict = user_dict['files']
     return files_dict
+
+def remove_user_file(username, filename):
+    """ Removes file from database and user data """
+    user_files = get_user_filesystem(username)
+    if filename in user_files:
+        delete_file(user_files[filename]['location'])
+        user_files.pop(filename)
+        update_user_filesystem(username, user_files)
+        return True
+    else:
+        return False
 
 def register_user(username, password):
     """ Append new username to USER_DATA_FILE """

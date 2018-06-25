@@ -259,10 +259,7 @@ class ClientThread(threading.Thread):
 
         """
         filename = message[1]
-        user_files = database.get_user_filesystem(self.username)
-        if filename in user_files:
-            user_files.pop(filename)
-            database.update_user_filesystem(self.username, user_files)
+        if database.remove_user_file(self.username, filename):
             self.send_text('Remove succeeded')
         else:
             self.send_text('File not found')

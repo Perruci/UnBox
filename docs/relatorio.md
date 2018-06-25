@@ -10,7 +10,7 @@ UnBox: Aplicação Dropbox-like
 * Monitoras:
   * Camila Camargo | 130104868@aluno.unb.br
   * Mariana Makiuchi | marimakiuchi@aluno.unb.br
-  
+
 ### 1. Objetivos
 
 Através do desenvolvimento do sistema UnBox pretende-se aplicar os conhecimentos explorados na disciplina Transmissão de Dados.
@@ -32,7 +32,7 @@ Tendo como referência as especificações propostas no roteiro do trabalho, est
 Estas especificações serão abordadas individualmente nas seções seguintes.
 
 #### 2.1 Linguagem e Dependências
-O sistema foi desenvolvido na linguagem Python 3.6.5, em ambiente OSX 10.13.5. 
+O sistema foi desenvolvido na linguagem Python 3.6.5, em ambiente OSX 10.13.5.
 O funcionamento do sistema em sistema Ubuntu 16.04 foi verificado como adequado.
 
 Todas as dependências foram armazenadas em um ambiente virtual [Pipenv](https://docs.pipenv.org).
@@ -52,7 +52,7 @@ Uma lista completa dos módulos utilizadas no sistema está expressa a seguir:
     * time
     * sys
     * os
-    
+
 #### 2.2 Disposição de Arquivos
 
 A disposição de arquivos esperada ao executar-se o sistema está disposta a seguir.
@@ -96,7 +96,7 @@ UnBox
 #### 2.3 Instruções de Execução
 
 Para a chamada adequada do sistema UnBox recomenda-se acessar o diretório root do projeto e inicializar o ambiênte virtual.
-Este procedimento deve ser realizado em cada terminal utilizado. 
+Este procedimento deve ser realizado em cada terminal utilizado.
 
 ```bash
 cd path/to/UnBox
@@ -124,6 +124,10 @@ Os caminhos relativos de arquivos importantes parte d   este diretório.
 **Importante 3:** O download de arquivos não suporta caminhos para o arquivo com espaços.
 
 ### 3. Exemplo de Execução
+
+Além do passo a passo apresentado nesta seção, também registrou-se um vídeo do sistema em funcionamento.
+O vídeo pode ser acessado por meio do link:
+    https://youtu.be/8UaEr20ok-c
 
 #### 3.1 Autenticação de Usuário
 A autenticação com o usuário é realizada por meio de uma requisição ao servidor.
@@ -295,7 +299,7 @@ O proposto protocolo de comunicação é baseado em requisições realizadas pel
 A modelagem em máquina de estados está representada no fluxograma a seguir.
 A figura representa o estado do sistema assim que um novo cliente executa a aplicação e solicita a conexão ao servidor. Um breve resumo das funcionalidades será exposto para explicar o fluxograma.
 
-Analisando o "Server Side", após receber uma solicitação de conexão TCP é criada uma nova thread para se conectar ao cliente. Em seguida, esta thread entra em modo idle, em que espera requisições do cliente. Ao receber requisições, realiza as operações necessárias acessando o banco de dados. 
+Analisando o "Server Side", após receber uma solicitação de conexão TCP é criada uma nova thread para se conectar ao cliente. Em seguida, esta thread entra em modo idle, em que espera requisições do cliente. Ao receber requisições, realiza as operações necessárias acessando o banco de dados.
 
 Já no client side, assim que a conexão com o servidor é estabelecida, solicita-se a autenticação do usuário. O par nome de usuário e senha são enviados para o servidor em uma requisição este confere os dados com os armazenados no arquivo *user_data.yaml*. A partir de então, acessa-se a janela principal do cliente, em que é possível solicitar as operações especificadas do servidor.
 
@@ -417,7 +421,7 @@ Ao ler a maior parte das requisições e respostas, já é possível inferir seu
 
 ### 5. Banco de Dados
 
-O banco de dados é de acesso exclusivo do servidor. Ele consiste tanto do diretório *server/database/*, como do arquivo *server/user_data.yaml*. 
+O banco de dados é de acesso exclusivo do servidor. Ele consiste tanto do diretório *server/database/*, como do arquivo *server/user_data.yaml*.
 
 #### 5.1 Arquivos do Servidor
 
@@ -441,13 +445,13 @@ Os dados de acesso dos usuários do UnBox são persistentes, isso significa que 
 ```yaml
 username:
     'files':
-        file_name_shown_to_client: {'location': real_file_name, 'size': file_size} 
+        file_name_shown_to_client: {'location': real_file_name, 'size': file_size}
     password: user_password
 ```
 
 Note que os dados de usuário são armazenados em um dicionário python, cujas chaves são os nomes de usuário e os valores são 'password' e 'files'. Enquanto username['password'] aponta para uma string user_password, username['files'] aponta para um outro dicionário. As chaves deste dicionário são os nomes de arquivos enviados e mostrados aos clientes e, por meio delas, pode-se obter sua localização no servidor e o seu tamanho.
 
-Os arquivos enviados pelos usuários são salvos no caminho 
+Os arquivos enviados pelos usuários são salvos no caminho
 
 ```
 server/database/ + username['files'][file_name_shown_to_client]['location']
@@ -456,7 +460,7 @@ server/database/ + username['files'][file_name_shown_to_client]['location']
 Ou, resumidamente
 
 ```
-server/database/ + real_file_name 
+server/database/ + real_file_name
 ```
 
 No exemplo da seção 5.1:
@@ -472,32 +476,32 @@ Foi implementado um sistema de log capaz de registrar as mensagens de texto troc
 Um exemplo do log registrado no cliente pode ser visto a seguir. Foi feita uma quebra de linha após as flags de INFO e DEBUG para caber na tela.
 
 ```
-2018-06-25 01:39:51,779 - network_client - DEBUG 
+2018-06-25 01:39:51,779 - network_client - DEBUG
 - Message sent from client: Log-in request,pedro,senha
-2018-06-25 01:39:51,782 - network_client - DEBUG 
+2018-06-25 01:39:51,782 - network_client - DEBUG
 - Message recieved on client: Found
-2018-06-25 01:40:18,248 - network_client - DEBUG 
+2018-06-25 01:40:18,248 - network_client - DEBUG
 - Message sent from client: Upload request,td/trabalho/roteiro.pdf,381040
-2018-06-25 01:40:18,756 - network_client - INFO 
+2018-06-25 01:40:18,756 - network_client - INFO
 - Uploaded file /Users/pedroperruci/Desktop/github/UnBox/client/home/td/roteiro.pdf of size 381040 to server
-2018-06-25 01:40:22,117 - network_client - DEBUG 
+2018-06-25 01:40:22,117 - network_client - DEBUG
 - Message sent from client: bye
 ```
 
 Agora, um exemplo do log salvo no lado do servidor
 
 ```
-2018-06-25 01:39:51,782 - client_thread - INFO 
+2018-06-25 01:39:51,782 - client_thread - INFO
 - User access authenticated pedro
-2018-06-25 01:40:18,248 - client_thread - DEBUG 
+2018-06-25 01:40:18,248 - client_thread - DEBUG
 - Message recieved from client at ('127.0.0.1', 54946): Upload request,td/trabalho/roteiro.pdf,381040
-2018-06-25 01:40:18,248 - client_thread - DEBUG 
+2018-06-25 01:40:18,248 - client_thread - DEBUG
 - Message recieved from client at ('127.0.0.1', 54946): Upload request,td/trabalho/roteiro.pdf,381040
-2018-06-25 01:40:18,786 - client_thread - INFO 
+2018-06-25 01:40:18,786 - client_thread - INFO
 - User pedro uploaded a new file, stored on the path pedro_td_trabalho_roteiro.pdf
-2018-06-25 01:40:18,786 - client_thread - INFO 
+2018-06-25 01:40:18,786 - client_thread - INFO
 - User pedro uploaded a new file, stored on the path pedro_td_trabalho_roteiro.pdf
-2018-06-25 01:40:22,117 - client_thread - DEBUG 
+2018-06-25 01:40:22,117 - client_thread - DEBUG
 - Message recieved from client at ('127.0.0.1', 54946): bye
 ```
 
